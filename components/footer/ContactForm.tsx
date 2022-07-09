@@ -59,6 +59,7 @@ const ContactForm: React.FC<{ servicesArr?: any }> = ({ servicesArr }) => {
   const toast = useToast()
   const { initialData } = useAppContext()
   const contacts = initialData?.contact?.data?.attributes as any
+  console.log('contacts', contacts)
 
   const onSubmit: SubmitHandler<IContactFormInputs> = async (data) => {
     try {

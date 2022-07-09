@@ -2,7 +2,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: `${process.env.SERVER_URL}/graphql`,
+  uri: `https://mlntransport-admin.herokuapp.com/graphql`,
   defaultOptions: {
     watchQuery: {
       fetchPolicy: 'no-cache',

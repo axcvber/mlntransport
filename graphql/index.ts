@@ -17,7 +17,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 
 const cache = new InMemoryCache()
 const link = new HttpLink({
-  uri: `https://mlntransport-admin.com/graphql`,
+  uri: `https://mlntransport-admin.herokuapp.com/graphql`,
 })
 const client = new ApolloClient({
   cache,

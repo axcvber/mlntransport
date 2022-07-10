@@ -10,6 +10,8 @@ import '@fontsource/ubuntu/700.css'
 import '@fontsource/open-sans/400.css'
 import '@fontsource/open-sans/500.css'
 import '@fontsource/open-sans/700.css'
+import '@fontsource/open-sans/800.css'
+
 import { ApolloProvider } from '@apollo/client'
 import client from '../graphql'
 import { InitialDataQuery } from '../generated'

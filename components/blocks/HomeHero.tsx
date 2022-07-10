@@ -92,44 +92,65 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
           </Box>
         </motion.div>
 
-        <Box
-          // w={'100%'}
-          // bg='red'
-          flex={1}
-          sx={{
-            position: 'relative',
+        <motion.div
+          initial='hidden'
+          animate='visible'
+          variants={{
+            hidden: {
+              scale: 0.8,
+              opacity: 0,
+              x: 200,
+            },
+            visible: {
+              scale: 1,
+              opacity: 1,
+              x: 0,
+
+              transition: {
+                delay: 0.3,
+              },
+            },
           }}
-          // _before={{
-          //   bottom: -100,
-          //   left: -50,
-          //   zIndex: -1,
-          //   position: 'absolute',
-          //   content: '""',
-          //   display: 'block',
-          //   width: '500px',
-          //   height: '500px',
-          //   borderRadius: '50% 10% 50% 20%',
-          //   filter: 'blur(50px)',
-          //   background: 'radial-gradient(circle at 50% 50%,rgba(241,124,87, 1), rgba(241,124,87, 0))',
-          //   opacity: 1,
-          // }}
-          // _after={{
-          //   top: -100,
-          //   right: -100,
-          //   zIndex: -1,
-          //   position: 'absolute',
-          //   content: '""',
-          //   display: 'block',
-          //   width: '500px',
-          //   height: '500px',
-          //   borderRadius: '50% 10% 50% 20%',
-          //   filter: 'blur(50px)',
-          //   background: 'radial-gradient(circle at 50% 50%,rgba(241,124,87, 1), rgba(241,124,87, 0))',
-          //   opacity: 1,
-          // }}
         >
-          <Image width={800} height={600} src={'/van2.png'} alt='van' />
-        </Box>
+          <Box
+            // w={'100%'}
+            // bg='red'
+            flex={1}
+            sx={{
+              position: 'relative',
+            }}
+            // _before={{
+            //   bottom: -100,
+            //   left: -50,
+            //   zIndex: -1,
+            //   position: 'absolute',
+            //   content: '""',
+            //   display: 'block',
+            //   width: '500px',
+            //   height: '500px',
+            //   borderRadius: '50% 10% 50% 20%',
+            //   filter: 'blur(50px)',
+            //   background: 'radial-gradient(circle at 50% 50%,rgba(241,124,87, 1), rgba(241,124,87, 0))',
+            //   opacity: 1,
+            // }}
+            // _after={{
+            //   top: -100,
+            //   right: -100,
+            //   zIndex: -1,
+            //   position: 'absolute',
+            //   content: '""',
+            //   display: 'block',
+            //   width: '500px',
+            //   height: '500px',
+            //   borderRadius: '50% 10% 50% 20%',
+            //   filter: 'blur(50px)',
+            //   background: 'radial-gradient(circle at 50% 50%,rgba(241,124,87, 1), rgba(241,124,87, 0))',
+            //   opacity: 1,
+            // }}
+          >
+            <Image width={800} height={600} src={'/van2.png'} alt='van' />
+          </Box>
+        </motion.div>
       </Stack>
     </Box>
   )

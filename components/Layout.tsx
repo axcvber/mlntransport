@@ -10,14 +10,16 @@ import ScrollTop from './ScrollTop'
 
 interface ILayout {
   children: ReactChild
+  isRouteChanging: boolean
+  loadingKey: number
 }
 
-const Layout: React.FC<ILayout> = ({ children }) => {
+const Layout: React.FC<ILayout> = ({ children, isRouteChanging, loadingKey }) => {
   const router = useRouter()
 
   return (
     <Box minH={'100vh'} display='flex' flexDirection={'column'} overflowX='hidden'>
-      <Navbar />
+      <Navbar isRouteChanging={isRouteChanging} loadingKey={loadingKey} />
       <Container maxW='container.xl' as={'main'} mt={'100px'}>
         {children}
       </Container>

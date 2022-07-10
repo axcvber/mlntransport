@@ -6,4 +6,5 @@ interface IGlobalContext {
 }
 
 const GlobalContext = createContext<Partial<IGlobalContext>>({})
+
 export default GlobalContext

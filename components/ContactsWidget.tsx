@@ -25,47 +25,51 @@ const ContactsWidget = () => {
 
   return (
     <Box
+      as='aside'
       sx={{
         position: 'fixed',
         top: '45%',
-        left: { base: 'auto', xl: 3 },
-        right: { base: 3, xl: 'auto' },
+        right: 3,
         zIndex: 999,
       }}
     >
-      {widgetItems.map((item, inx: number) => {
-        return (
-          item.link && (
-            <a key={inx} href={item.link} target='_blank' rel='noopener noreferrer'>
-              <Box
-                sx={{
-                  border: '2px solid #fff',
-                  my: 3,
-                  boxShadow: '-1px 0px 19px 2px rgba(241,124,87,0.61)',
-                  borderRadius: '50%',
-                  bg: 'brand.500',
-                  p: 2.5,
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  'svg': {
-                    fontSize: 22,
-                    color: '#fff',
-                    transition: 'all 0.2s ease',
-                  },
-                  '&:hover': {
-                    transform: 'scale(1.2)',
-                    'svg': {
-                      transform: item.withRotate ? 'rotate(25deg)' : 'none',
-                    },
-                  },
-                }}
-              >
-                {item.icon}
-              </Box>
-            </a>
+      <ul>
+        {widgetItems.map((item, inx: number) => {
+          return (
+            item.link && (
+              <li key={inx}>
+                <a href={item.link} target='_blank' rel='noopener noreferrer'>
+                  <Box
+                    sx={{
+                      border: '2px solid #fff',
+                      my: 3,
+                      boxShadow: '-1px 0px 19px 2px rgba(241,124,87,0.61)',
+                      borderRadius: '50%',
+                      bg: 'brand.400',
+                      p: 2.5,
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      'svg': {
+                        fontSize: 22,
+                        color: '#fff',
+                        transition: 'all 0.2s ease',
+                      },
+                      '&:hover': {
+                        transform: 'scale(1.2)',
+                        'svg': {
+                          transform: item.withRotate ? 'rotate(25deg)' : 'none',
+                        },
+                      },
+                    }}
+                  >
+                    {item.icon}
+                  </Box>
+                </a>
+              </li>
+            )
           )
-        )
-      })}
+        })}
+      </ul>
     </Box>
   )
 }

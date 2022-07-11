@@ -1,4 +1,4 @@
-import { Box, Container, Heading, HStack, Stack, Text } from '@chakra-ui/react'
+import { Box, Container, Divider, Heading, HStack, Stack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 import { FaFacebookF, FaInstagram, FaTelegramPlane, FaTwitter, FaViber, FaWhatsapp } from 'react-icons/fa'
@@ -13,7 +13,6 @@ const Footer = () => {
   const { initialData } = useAppContext()
   const [hostname, setHostname] = React.useState<string | undefined>('')
   const icons = initialData?.contact?.data?.attributes?.socialNetworks
-  const servicesArr = initialData?.services?.data
 
   const getSocialIcon = (iconName?: string) => {
     let Icon
@@ -46,63 +45,61 @@ const Footer = () => {
     }
   }, [])
   return (
-    <Box mt='auto'>
+    <Container maxW={'container.xl'} mt='auto'>
       <Container maxW={'container.lg'}>
-        <ContactForm servicesArr={servicesArr} />
+        <ContactForm />
       </Container>
-      <Box as='footer' bg={'#383838'} py={4}>
-        <Container
-          maxW={'container.xl'}
-          display='flex'
-          alignItems='center'
-          justifyContent={'space-between'}
-          flexDirection={{ base: 'column', md: 'row' }}
-          color='#fff'
-        >
-          <Logo isSticky />
-          <Text fontSize={'xs'} sx={{ display: 'flex', order: { base: 3, md: 2 } }}>
-            &copy;{new Date().getFullYear()} {'mintransport.com'}. All rights reserved
-          </Text>
+      <Divider />
+      <Box
+        as='footer'
+        py={4}
+        display='flex'
+        alignItems='center'
+        justifyContent={'space-between'}
+        flexDirection={{ base: 'column', md: 'row' }}
+      >
+        <Logo />
+        <Text fontSize={'xs'} sx={{ display: 'flex', order: { base: 3, md: 2 } }}>
+          &copy;{new Date().getFullYear()} {'mintransport.com'}. All rights reserved
+        </Text>
 
-          <HStack sx={{ display: 'flex', order: { base: 2, md: 3 }, my: { base: 4, md: 0 } }}>
-            {icons?.map((item) => (
-              <a key={item?.id} href={item?.link} target='_blank' rel='noopener noreferrer'>
-                <Box
-                  sx={{
-                    w: '35px',
-                    h: '35px',
-                    // bg: 'brand.500',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    border: '1px solid',
-                    borderColor: 'brand.500',
-                    // p: '10px',
-                    transition: 'all 0.2s ease',
-                    '&:hover': {
-                      bg: 'brand.500',
-                      transform: 'translateY(-2px)',
-                      'svg': {
-                        color: '#fff',
-                      },
-                    },
+        <HStack sx={{ display: 'flex', order: { base: 2, md: 3 }, my: { base: 4, md: 0 } }}>
+          {icons?.map((item) => (
+            <a key={item?.id} href={item?.link} target='_blank' rel='noopener noreferrer'>
+              <Box
+                sx={{
+                  w: '35px',
+                  h: '35px',
+                  borderRadius: '50%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  cursor: 'pointer',
+                  // border: '1px solid',
+                  // borderColor: 'brand.500',
+                  transition: 'all 0.2s ease',
+                  bg: 'brand.50',
+                  '&:hover': {
+                    bg: 'brand.500',
+                    transform: 'translateY(-2px)',
                     'svg': {
-                      color: 'brand.500',
-                      fontSize: 18,
-                      transition: 'all 0.2s ease',
+                      color: '#fff',
                     },
-                  }}
-                >
-                  {getSocialIcon(item?.icon)}
-                </Box>
-              </a>
-            ))}
-          </HStack>
-        </Container>
+                  },
+                  'svg': {
+                    color: 'brand.500',
+                    fontSize: 18,
+                    transition: 'all 0.2s ease',
+                  },
+                }}
+              >
+                {getSocialIcon(item?.icon)}
+              </Box>
+            </a>
+          ))}
+        </HStack>
       </Box>
-    </Box>
+    </Container>
   )
 }
 

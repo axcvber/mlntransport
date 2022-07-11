@@ -58,6 +58,20 @@ const theme = extendTheme({
   // },
   styles: {
     global: (props: StyleFunctionProps) => ({
+      '::-webkit-scrollbar': {
+        width: '14px',
+      },
+      '::-webkit-scrollbar-track': {
+        backgroundColor: '#fff',
+      },
+      '::-webkit-scrollbar-thumb': {
+        backgroundColor: 'brand.400',
+        borderRadius: '8px',
+        border: '3px solid #fff',
+      },
+      '::-webkit-scrollbar-thumb:hover': {
+        backgroundColor: 'brand.500',
+      },
       'ul, ol': {
         listStyle: 'none',
       },

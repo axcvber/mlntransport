@@ -1,38 +1,17 @@
-import { Box, Button, Grid, GridItem, Heading, Img, Skeleton, Stack, Text } from '@chakra-ui/react'
+import { Box, Grid, GridItem, Skeleton, Stack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
-import truckImg from '../../public/truck2.png'
-import exchangeImg from '../../public/exchange.png'
-import settingsImg from '../../public/settings.png'
-import trashImg from '../../public/trash.png'
-import { FiArrowUpRight, FiCornerDownRight } from 'react-icons/fi'
+import { FiArrowUpRight } from 'react-icons/fi'
 import { useServicesQuery } from '../../generated'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import BlockTitle from '../BlockTitle'
-
-export const servicesArr = [
-  {
-    title: 'Transportation',
-    icon: truckImg,
-  },
-  {
-    title: 'Relocation',
-    icon: exchangeImg,
-  },
-  {
-    title: 'Furniture assembly',
-    icon: settingsImg,
-  },
-  {
-    title: 'Waste hauler',
-    icon: trashImg,
-  },
-]
+import useLocale from '../../hooks/useLocale'
 
 const Services = ({ title }: any) => {
   const router = useRouter()
-  const { loading, data, error, refetch } = useServicesQuery({
+  const t = useLocale()
+  const { data, error } = useServicesQuery({
     variables: {
       locale: router.locale,
     },
@@ -49,7 +28,13 @@ const Services = ({ title }: any) => {
               .fill(0)
               .map((_, inx: number) => (
                 <GridItem key={inx}>
-                  <Skeleton h={'195px'} borderRadius={'2xl'} sx={{ boxShadow: '0 0 78px -13px #b7b7b7' }} />
+                  <Skeleton
+                    startColor='gray.100'
+                    endColor='gray.200'
+                    h={'195px'}
+                    borderRadius={'2xl'}
+                    sx={{ boxShadow: '0 0 78px -13px #b7b7b7' }}
+                  />
                 </GridItem>
               ))
           : data.services?.data.map((item) => (
@@ -57,14 +42,12 @@ const Services = ({ title }: any) => {
                 key={item.id}
                 bg='white'
                 borderRadius={'2xl'}
-                p={5}
                 sx={{
                   position: 'relative',
                   zIndex: 2,
                   transition: '.4s',
                   boxShadow: '0 0 78px -13px #b7b7b7',
                   overflow: 'hidden',
-                  // border: '1px solid #F17C57',
                 }}
                 _before={{
                   content: '""',
@@ -91,20 +74,23 @@ const Services = ({ title }: any) => {
               >
                 <Link href={`/services/${item.attributes?.slug}`} passHref>
                   <a>
-                    <Stack sx={{ zIndex: 2, position: 'relative' }} alignItems={{ base: 'center', sm: 'flex-start' }}>
+                    <Stack
+                      sx={{ zIndex: 2, position: 'relative', p: 5 }}
+                      alignItems={{ base: 'center', sm: 'flex-start' }}
+                    >
                       <Box>
                         <Image
                           src={item.attributes?.icon.data?.attributes?.url || ''}
                           width={70}
                           height={70}
-                          alt='truck'
+                          alt={item.attributes?.icon.data?.attributes?.alternativeText || ''}
                         />
                       </Box>
                       <Text fontSize={'2xl'} fontWeight={700}>
                         {item.attributes?.title}
                       </Text>
                       <Stack direction='row' alignItems={'center'}>
-                        <Text fontSize={'lg'}>Read more</Text>
+                        <Text fontSize={'lg'}>{t.link.readMore}</Text>
                         <FiArrowUpRight fontSize={18} />
                       </Stack>
                     </Stack>
@@ -113,20 +99,6 @@ const Services = ({ title }: any) => {
               </GridItem>
             ))}
       </Grid>
-
-      {/* <Stack
-          w={300}
-          bg='gray'
-          borderRadius={10}
-          boxShadow='xl'
-          p={5}
-          _hover={{
-            bg: 'red',
-            cursor: 'pointer',
-          }}
-        >
-          
-        </Stack> */}
     </Box>
   )
 }

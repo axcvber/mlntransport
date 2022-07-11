@@ -34,7 +34,7 @@ const squareVariants = {
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
-const ContactForm: React.FC<{ servicesArr?: any }> = ({ servicesArr }) => {
+const ContactForm = () => {
   const t = useLocale()
   const ContactFormSchema = yup
     .object({
@@ -66,14 +66,15 @@ const ContactForm: React.FC<{ servicesArr?: any }> = ({ servicesArr }) => {
   const toast = useToast()
   const { initialData } = useAppContext()
   const contacts = initialData?.contact?.data?.attributes as any
+  const servicesArr = initialData?.services?.data
 
-  const controls = useAnimation()
-  const [ref, inView] = useInView()
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible')
-    }
-  }, [controls, inView])
+  // const controls = useAnimation()
+  // const [ref, inView] = useInView()
+  // useEffect(() => {
+  //   if (inView) {
+  //     controls.start('visible')
+  //   }
+  // }, [controls, inView])
 
   const onSubmit: SubmitHandler<IContactFormInputs> = async (data) => {
     try {
@@ -96,134 +97,129 @@ const ContactForm: React.FC<{ servicesArr?: any }> = ({ servicesArr }) => {
   }
 
   return (
-    <motion.div
-      ref={ref}
-      animate={controls}
-      initial='hidden'
-      transition={squareVariants.transition}
-      variants={squareVariants}
-      className='square'
-    >
-      <div id='form'>
-        <VStack textAlign={'center'}>
-          <Heading>{t.section.contactUs.title}</Heading>
-          <Text mt={4} maxW='md'>
-            {t.section.contactUs.subtitle}
-          </Text>
-        </VStack>
-        <Box
-          mt={5}
-          mb={10}
-          borderRadius={20}
-          sx={{
-            p: 3,
-            bg: '#FFF',
-            boxShadow: '0px 2px 32px 2px rgba(0, 0, 0, 0.23)',
-          }}
-        >
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={5}>
-            <Box
-              bg='brand.500'
-              color='#fff'
-              borderRadius={20}
-              w={{ base: '100%', md: '300px' }}
-              p={4}
-              sx={{
-                position: 'relative',
-                overflow: 'hidden',
-                zIndex: 1,
-              }}
-              _after={{
-                content: '""',
-                display: 'block',
-                width: '100px',
-                height: '100px',
-                borderRadius: '50%',
-                position: 'absolute',
-                bottom: '20px',
-                right: '20px',
-                bg: 'brand.300',
-                zIndex: -1,
-                opacity: 0.6,
-              }}
-              _before={{
-                content: '""',
-                display: 'block',
-                width: '200px',
-                height: '200px',
-                borderRadius: '50%',
-                position: 'absolute',
-                bottom: '-100px',
-                right: '-100px',
-                bg: 'brand.600',
-                zIndex: -1,
-              }}
-            >
-              <VStack mb={8} alignItems='flex-start'>
-                <Heading size='lg' as='h3' wordBreak={'break-word'}>
-                  {t.form.info.title}
-                </Heading>
-                <Text fontSize={'sm'}>{t.form.info.subtitle}</Text>
-              </VStack>
+    // <motion.div
+    //   ref={ref}
+    //   animate={controls}
+    //   initial='hidden'
+    //   transition={squareVariants.transition}
+    //   variants={squareVariants}
+    //   className='square'
+    // >
+    <div id='form'>
+      <VStack textAlign={'center'}>
+        <Heading>{t.section.contactUs.title}</Heading>
+        <Text mt={4} maxW='md'>
+          {t.section.contactUs.subtitle}
+        </Text>
+      </VStack>
+      <Box
+        mt={5}
+        mb={10}
+        borderRadius={20}
+        sx={{
+          p: 3,
+          bg: '#FFF',
+          boxShadow: '0px 2px 32px 2px rgba(0, 0, 0, 0.23)',
+        }}
+      >
+        <Stack direction={{ base: 'column', md: 'row' }} spacing={5}>
+          <Box
+            bg='brand.500'
+            color='#fff'
+            borderRadius={20}
+            w={{ base: '100%', md: '300px' }}
+            p={4}
+            sx={{
+              position: 'relative',
+              overflow: 'hidden',
+              zIndex: 1,
+            }}
+            _after={{
+              content: '""',
+              display: 'block',
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              position: 'absolute',
+              bottom: '20px',
+              right: '20px',
+              bg: 'brand.300',
+              zIndex: -1,
+              opacity: 0.6,
+            }}
+            _before={{
+              content: '""',
+              display: 'block',
+              width: '200px',
+              height: '200px',
+              borderRadius: '50%',
+              position: 'absolute',
+              bottom: '-100px',
+              right: '-100px',
+              bg: 'brand.600',
+              zIndex: -1,
+            }}
+          >
+            <VStack mb={8} alignItems='flex-start'>
+              <Heading size='lg' as='h3' wordBreak={'break-word'}>
+                {t.form.info.title}
+              </Heading>
+              <Text fontSize={'sm'}>{t.form.info.subtitle}</Text>
+            </VStack>
 
-              <VStack spacing={4} alignItems='flex-start' flexWrap={'wrap'}>
-                {contacts.phoneNumbers.map((item: any) => (
-                  <ContactInfoButton
-                    key={item.id}
-                    link={`tel:${item?.phone}`}
-                    label={item.phone}
-                    icon={<FaPhoneAlt />}
-                  />
-                ))}
-                <ContactInfoButton link={`mailto:${contacts.email}`} label={contacts.email} icon={<IoMail />} />
-                {contacts.address && (
-                  <ContactInfoButton
-                    link={contacts?.address?.googleMapLink}
-                    label={contacts?.address?.address}
-                    icon={<IoLocationSharp />}
-                  />
-                )}
-              </VStack>
-            </Box>
+            <VStack spacing={4} alignItems='flex-start' flexWrap={'wrap'}>
+              {contacts.phoneNumbers.map((item: any) => (
+                <ContactInfoButton key={item.id} link={`tel:${item?.phone}`} label={item.phone} icon={<FaPhoneAlt />} />
+              ))}
+              <ContactInfoButton link={`mailto:${contacts.email}`} label={contacts.email} icon={<IoMail />} />
+              {contacts.address && (
+                <ContactInfoButton
+                  link={contacts?.address?.googleMapLink}
+                  label={contacts?.address?.address}
+                  icon={<IoLocationSharp />}
+                />
+              )}
+            </VStack>
+          </Box>
 
-            <Box px={{ base: 2, md: 2, lg: 10 }} pt={2} flex={1}>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Stack spacing={4}>
-                  <Stack direction={{ base: 'column', sm: 'row' }}>
-                    <Field name='fullName' control={control} label={t.form.label.fullName} icon={<FiUser />} />
-                    <Field name='email' control={control} label={t.form.label.email} type='email' icon={<FiMail />} />
-                  </Stack>
-                  <Stack direction={{ base: 'column', sm: 'row' }}>
-                    <PhoneField control={control} name='phone' label={t.form.label.phone} icon={<FiPhone />} />
-                    <Select
-                      name='service'
-                      control={control}
-                      options={servicesArr || []}
-                      placeholder={t.form.placeholder.service}
-                      label={t.form.label.service}
-                      icon={<FiPackage />}
-                      setValue={setValue}
-                      isSubmitSuccessful={isSubmitSuccessful}
-                    />
-                  </Stack>
-                  <Textarea name='message' control={control} label={t.form.label.message} icon={<FiMessageSquare />} />
-                  <Box display={'flex'} justifyContent='flex-end'>
-                    <Button
-                      colorScheme='brand'
-                      isLoading={isSubmitting}
-                      type='submit'
-                      rightIcon={<FiArrowUpRight fontSize={20} />}
-                    >
-                      {t.button.sendForm}
-                    </Button>
-                  </Box>
+          <Box px={{ base: 2, md: 2, lg: 10 }} pt={2} flex={1}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Stack spacing={4}>
+                <Stack direction={{ base: 'column', sm: 'row' }}>
+                  <Field name='fullName' control={control} label={t.form.label.fullName} icon={<FiUser />} />
+                  <Field name='email' control={control} label={t.form.label.email} type='email' icon={<FiMail />} />
                 </Stack>
-              </form>
-            </Box>
-          </Stack>
-        </Box>
-      </div>
-    </motion.div>
+                <Stack direction={{ base: 'column', sm: 'row' }}>
+                  <PhoneField control={control} name='phone' label={t.form.label.phone} icon={<FiPhone />} />
+                  <Select
+                    name='service'
+                    control={control}
+                    options={servicesArr || []}
+                    placeholder={t.form.placeholder.service}
+                    label={t.form.label.service}
+                    icon={<FiPackage />}
+                    setValue={setValue}
+                    isSubmitSuccessful={isSubmitSuccessful}
+                  />
+                </Stack>
+                <Textarea name='message' control={control} label={t.form.label.message} icon={<FiMessageSquare />} />
+                <Box display={'flex'} justifyContent='flex-end'>
+                  <Button
+                    colorScheme='brand'
+                    isLoading={isSubmitting}
+                    type='submit'
+                    rightIcon={<FiArrowUpRight fontSize={20} />}
+                  >
+                    {t.button.sendForm}
+                  </Button>
+                </Box>
+              </Stack>
+            </form>
+          </Box>
+        </Stack>
+      </Box>
+    </div>
+    // </motion.div>
   )
 }
 

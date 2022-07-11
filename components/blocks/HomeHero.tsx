@@ -4,6 +4,8 @@ import React from 'react'
 import { FiArrowRight, FiBox, FiLayers, FiMaximize, FiMaximize2, FiTruck } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 import useLocale from '../../hooks/useLocale'
+import Link from 'next/link'
+import RSLink from '../RSLink.tsx'
 
 const variants = {
   hidden: { opacity: 0 },
@@ -35,15 +37,26 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
         >
           <Box w={{ base: '100%', lg: '500px' }}>
             <Stack spacing={3}>
-              <Heading textTransform={'uppercase'} as='h1' size={{ base: '2xl', sm: '3xl' }} fontWeight={800}>
+              <Heading
+                wordBreak={'break-word'}
+                textTransform={'uppercase'}
+                as='h1'
+                size={{ base: '2xl', sm: '3xl' }}
+                fontWeight={800}
+              >
                 {heroTitle}
               </Heading>
               <Text>{heroDescription}</Text>
               <Stack direction='row' spacing={4}>
-                <Button colorScheme={'brand'}>{t.button.contactUs}</Button>
-                <Button colorScheme={'brand'} variant='outline' rightIcon={<FiArrowRight />}>
-                  {t.button.seePrices}
-                </Button>
+                <RSLink to='form'>
+                  <Button colorScheme={'brand'}>{t.button.contactUs}</Button>
+                </RSLink>
+
+                <Link href={'/prices'}>
+                  <Button colorScheme={'brand'} variant='outline' rightIcon={<FiArrowRight />}>
+                    {t.button.seePrices}
+                  </Button>
+                </Link>
               </Stack>
             </Stack>
             {dimensions && (
@@ -113,42 +126,37 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
           }}
         >
           <Box
-            // w={'100%'}
-            // bg='red'
             flex={1}
             sx={{
               position: 'relative',
+              '&:before, &:after': {
+                zIndex: -1,
+                position: 'absolute',
+                content: '""',
+                display: 'block',
+                width: '500px',
+                height: '500px',
+                borderRadius: '50% 10% 50% 20%',
+                filter: 'blur(50px)',
+                background: 'radial-gradient(circle at 50% 50%,rgba(255,155,125, 1), rgba(255,155,125, 0))',
+                opacity: { base: 0, md: 0.9 },
+              },
             }}
-            // _before={{
-            //   bottom: -100,
-            //   left: -50,
-            //   zIndex: -1,
-            //   position: 'absolute',
-            //   content: '""',
-            //   display: 'block',
-            //   width: '500px',
-            //   height: '500px',
-            //   borderRadius: '50% 10% 50% 20%',
-            //   filter: 'blur(50px)',
-            //   background: 'radial-gradient(circle at 50% 50%,rgba(241,124,87, 1), rgba(241,124,87, 0))',
-            //   opacity: 1,
-            // }}
-            // _after={{
-            //   top: -100,
-            //   right: -100,
-            //   zIndex: -1,
-            //   position: 'absolute',
-            //   content: '""',
-            //   display: 'block',
-            //   width: '500px',
-            //   height: '500px',
-            //   borderRadius: '50% 10% 50% 20%',
-            //   filter: 'blur(50px)',
-            //   background: 'radial-gradient(circle at 50% 50%,rgba(241,124,87, 1), rgba(241,124,87, 0))',
-            //   opacity: 1,
-            // }}
+            _before={{
+              bottom: -100,
+              left: -50,
+            }}
+            _after={{
+              top: -100,
+              right: -100,
+            }}
           >
-            <Image width={800} height={600} src={'/van2.png'} alt='van' />
+            <Image
+              width={900}
+              height={600}
+              src={image.data.attributes.url}
+              alt={image.data.attributes.alternativeText}
+            />
           </Box>
         </motion.div>
       </Stack>

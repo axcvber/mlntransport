@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react'
+import { Box, useBreakpointValue } from '@chakra-ui/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -10,31 +10,27 @@ interface ILogo {
 
 const Logo: React.FC<ILogo> = ({ isSticky }) => {
   const { initialData } = useAppContext()
+  const isMobile = useBreakpointValue({ base: true, md: false })
   const global = initialData?.global?.data?.attributes
-  const logoUrl = isSticky ? global?.darkLogo.data?.attributes?.url : global?.lightLogo.data?.attributes?.url
-  return (
-    // <Box display={'flex'} h={'100%'} sx={{ position: 'relative', width: '250px' }}>
-    //   <Image layout='fill' objectFit='cover' src='/sitelogo.png' alt='logo' />
-    // </Box>
+  const logoUrl = isSticky ? global?.lightLogo.data?.attributes?.url : global?.darkLogo.data?.attributes?.url
 
+  return (
     <Link href='/' passHref>
       <Box
         as='a'
-        // display={'flex'}
+        display={'inline-flex'}
         sx={{
-          position: 'relative',
-          transition: 'all 0.3s ease',
-          width: isSticky ? '70px' : '100px',
-          height: isSticky ? '70px' : '100px',
+          transition: 'all 0.2s ease',
+          width: isSticky || isMobile ? '100px' : '130px',
+          height: '100%',
         }}
       >
         <Image
           priority
-          // objectFit='contain'
-          // objectPosition={'left'}
-          width={90}
-          height={90}
-          layout='responsive'
+          objectFit='contain'
+          objectPosition={'left'}
+          width={250}
+          height={120}
           src={logoUrl || ''}
           alt='logo'
         />

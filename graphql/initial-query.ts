@@ -81,7 +81,7 @@ export const INITIAL_QUERY = gql`
         }
       }
     }
-    services {
+    services(locale: $locale) {
       data {
         id
         attributes {

@@ -1,12 +1,12 @@
-import { Box, Button, Container, Hide, IconButton, Show, Stack } from '@chakra-ui/react'
+import { Box, Button, Container, Hide, IconButton, Show, Stack, useBreakpointValue } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Logo from '../Logo'
 import { FiMenu } from 'react-icons/fi'
 import useLocale from '../../hooks/useLocale'
 import MobileMenu from './MobileMenu'
 import NavMenu from './NavMenu'
-import { Link } from 'react-scroll'
 import Progress from '../Progress'
+import RSLink from '../RSLink.tsx'
 
 interface INavbar {
   isRouteChanging: boolean
@@ -17,6 +17,8 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
   const t = useLocale()
   const [stickyNav, setStickyNav] = useState<boolean>(false)
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
+  const showMobileMenu = useBreakpointValue({ base: true, lg: false })
+  const showMenu = useBreakpointValue({ base: false, lg: true })
 
   const scrollHandler = () => {
     if (window.pageYOffset > 0) {
@@ -45,6 +47,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
           top: 0,
           left: 0,
           w: '100%',
+          h: stickyNav ? '70px' : '100px',
           bg: stickyNav ? 'brand.500' : 'transparent',
           color: stickyNav ? '#fff' : 'inherit',
           boxShadow: stickyNav ? 'lg' : 'none',
@@ -53,12 +56,10 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
         <Container maxW='container.xl' h='100%' display='flex' justifyContent={'space-between'} alignItems={'center'}>
           <Logo isSticky={stickyNav} />
 
-          <Hide below='md'>
-            <NavMenu stickyNav={stickyNav} />
-          </Hide>
+          {showMenu && <NavMenu stickyNav={stickyNav} />}
 
           <Stack direction={'row'}>
-            <Link to='form' smooth={true} ignoreCancelEvents duration={600} offset={-70}>
+            <RSLink to='form'>
               <Button
                 bg={stickyNav ? '#fff' : 'brand.500'}
                 colorScheme={stickyNav ? 'gray' : 'brand'}
@@ -67,19 +68,21 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
               >
                 {t.button.contactUs}
               </Button>
-            </Link>
+            </RSLink>
 
-            <Show below='md'>
-              <IconButton
-                variant={'outline'}
-                aria-label='Open Menu'
-                colorScheme={stickyNav ? 'gray' : 'brand'}
-                borderColor={stickyNav ? '#fff' : 'brand.500'}
-                onClick={() => setOpenMenu(true)}
-                icon={<FiMenu fontSize={20} />}
-              />
-              <MobileMenu isOpen={isOpenMenu} onClose={() => setOpenMenu(false)} />
-            </Show>
+            {showMobileMenu && (
+              <>
+                <IconButton
+                  variant={'outline'}
+                  aria-label='Open Menu'
+                  colorScheme={stickyNav ? 'gray' : 'brand'}
+                  borderColor={stickyNav ? '#fff' : 'brand.500'}
+                  onClick={() => setOpenMenu(true)}
+                  icon={<FiMenu fontSize={20} />}
+                />
+                <MobileMenu isOpen={isOpenMenu} onClose={() => setOpenMenu(false)} />
+              </>
+            )}
           </Stack>
         </Container>
       </Box>

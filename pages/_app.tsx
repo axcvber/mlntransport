@@ -22,6 +22,7 @@ import Script from 'next/script'
 function MyApp({ Component, pageProps }: AppProps) {
   const { initialData } = pageProps
   const router = useRouter()
+  console.log('render')
 
   const [state, setState] = useState({
     isRouteChanging: false,
@@ -59,9 +60,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${initialData.global.data.attributes.googleAnalyticsTag}`}
-        strategy='lazyOnload'
+        strategy='afterInteractive'
       />
-      <Script id='google-analytics' strategy='lazyOnload'>
+      <Script id='google-analytics' strategy='afterInteractive'>
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){window.dataLayer.push(arguments);}

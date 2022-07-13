@@ -17,8 +17,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
   const t = useLocale()
   const [stickyNav, setStickyNav] = useState<boolean>(false)
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
-  const showMobileMenu = useBreakpointValue({ base: true, lg: false })
-  const showMenu = useBreakpointValue({ base: false, lg: true })
+  console.log('render navbar')
 
   const scrollHandler = () => {
     if (window.pageYOffset > 0) {
@@ -36,7 +35,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
   }, [])
 
   return (
-    <>
+    <React.Fragment>
       <Progress isRouteChanging={isRouteChanging} key={loadingKey} stickyNav={stickyNav} />
       <Box
         as='header'
@@ -56,7 +55,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
         <Container maxW='container.xl' h='100%' display='flex' justifyContent={'space-between'} alignItems={'center'}>
           <Logo isSticky={stickyNav} />
 
-          {showMenu && <NavMenu stickyNav={stickyNav} />}
+          <NavMenu stickyNav={stickyNav} />
 
           <Stack direction={'row'}>
             <RSLink to='form'>
@@ -70,23 +69,21 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
               </Button>
             </RSLink>
 
-            {showMobileMenu && (
-              <>
-                <IconButton
-                  variant={'outline'}
-                  aria-label='Open Menu'
-                  colorScheme={stickyNav ? 'gray' : 'brand'}
-                  borderColor={stickyNav ? '#fff' : 'brand.500'}
-                  onClick={() => setOpenMenu(true)}
-                  icon={<FiMenu fontSize={20} />}
-                />
-                <MobileMenu isOpen={isOpenMenu} onClose={() => setOpenMenu(false)} />
-              </>
-            )}
+            <Box display={{ base: 'block', lg: 'none' }}>
+              <IconButton
+                variant={'outline'}
+                aria-label='Open Menu'
+                colorScheme={stickyNav ? 'gray' : 'brand'}
+                borderColor={stickyNav ? '#fff' : 'brand.500'}
+                onClick={() => setOpenMenu(true)}
+                icon={<FiMenu fontSize={20} />}
+              />
+              <MobileMenu isOpen={isOpenMenu} onClose={() => setOpenMenu(false)} />
+            </Box>
           </Stack>
         </Container>
       </Box>
-    </>
+    </React.Fragment>
   )
 }
 

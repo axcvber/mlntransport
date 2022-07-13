@@ -1,8 +1,6 @@
-import { useQuery } from '@apollo/client'
 import {
   Box,
   Button,
-  chakra,
   List,
   ListItem,
   Menu,
@@ -15,7 +13,7 @@ import {
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi'
+import { FiChevronDown } from 'react-icons/fi'
 import useAppContext from '../../hooks/useAppContext'
 import useLocale from '../../hooks/useLocale'
 import LocaleMenu from './LocaleMenu'
@@ -66,10 +64,9 @@ const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
       columnGap={5}
       mx={4}
       py={4}
-      display={'flex'}
+      display={{ base: 'none', lg: 'flex' }}
       alignItems={'center'}
       flexWrap='wrap'
-      // bg='red'
       justifyContent={'center'}
     >
       {navLinks &&

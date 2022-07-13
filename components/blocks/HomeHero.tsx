@@ -129,6 +129,7 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
             flex={1}
             sx={{
               position: 'relative',
+
               '&:before, &:after': {
                 zIndex: -1,
                 position: 'absolute',

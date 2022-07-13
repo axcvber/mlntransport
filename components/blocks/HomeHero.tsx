@@ -1,7 +1,7 @@
-import { Box, Button, Divider, Heading, Stack, Text } from '@chakra-ui/react'
+import { Box, Button, Divider, Heading, Stack, Text, useDimensions } from '@chakra-ui/react'
 import Image from 'next/image'
-import React from 'react'
-import { FiArrowRight, FiBox, FiLayers, FiMaximize, FiMaximize2, FiTruck } from 'react-icons/fi'
+import React, { useRef } from 'react'
+import { FiArrowRight, FiLayers } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 import useLocale from '../../hooks/useLocale'
 import Link from 'next/link'
@@ -14,11 +14,13 @@ const variants = {
 
 const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image }) => {
   const t = useLocale()
+  const elementRef = useRef<any>()
+  const dimension = useDimensions(elementRef, true)
 
   return (
     <Box my={[0, 0, 0, 20]}>
       <Stack direction={{ base: 'column-reverse', lg: 'row' }} justifyContent={'space-between'} alignItems='center'>
-        <motion.div
+        {/* <motion.div
           initial='hidden'
           animate='visible'
           variants={{
@@ -34,78 +36,78 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
               },
             },
           }}
-        >
-          <Box w={{ base: '100%', lg: '500px' }}>
-            <Stack spacing={3}>
-              <Heading
-                wordBreak={'break-word'}
-                textTransform={'uppercase'}
-                as='h1'
-                size={{ base: '2xl', sm: '3xl' }}
-                fontWeight={800}
-              >
-                {heroTitle}
-              </Heading>
-              <Text>{heroDescription}</Text>
-              <Stack direction='row' spacing={4}>
-                <RSLink to='form'>
-                  <Button colorScheme={'brand'}>{t.button.contactUs}</Button>
-                </RSLink>
+        > */}
+        <Box w={{ base: '100%', lg: '500px' }}>
+          <Stack spacing={3}>
+            <Heading
+              wordBreak={'break-word'}
+              textTransform={'uppercase'}
+              as='h1'
+              size={{ base: '2xl', sm: '3xl' }}
+              fontWeight={800}
+            >
+              {heroTitle}
+            </Heading>
+            <Text>{heroDescription}</Text>
+            <Stack direction='row' spacing={4}>
+              <RSLink to='form'>
+                <Button colorScheme={'brand'}>{t.button.contactUs}</Button>
+              </RSLink>
 
-                <Link href={'/prices'}>
-                  <Button colorScheme={'brand'} variant='outline' rightIcon={<FiArrowRight />}>
-                    {t.button.seePrices}
-                  </Button>
-                </Link>
-              </Stack>
+              <Link href={'/prices'}>
+                <Button colorScheme={'brand'} variant='outline' rightIcon={<FiArrowRight />}>
+                  {t.button.seePrices}
+                </Button>
+              </Link>
             </Stack>
-            {dimensions && (
-              <Box mt={8}>
-                <Stack direction='row' alignItems='center' mb={1} color='gray.600'>
-                  <FiLayers fontSize={22} />
-                  <Text fontSize={'lg'} mb={1} fontWeight={700}>
-                    {t.homeHero.dimensions.title}
+          </Stack>
+          {dimensions && (
+            <Box mt={8}>
+              <Stack direction='row' alignItems='center' mb={1} color='gray.600'>
+                <FiLayers fontSize={22} />
+                <Text fontSize={'lg'} mb={1} fontWeight={700}>
+                  {t.homeHero.dimensions.title}
+                </Text>
+              </Stack>
+
+              <Stack
+                spacing={4}
+                h='60px'
+                direction={'row'}
+                alignItems='center'
+                divider={<Divider h={'20px'} orientation='vertical' borderColor='gray' borderWidth={1} />}
+              >
+                <Stack alignItems={'center'} spacing={1}>
+                  <Text color='brand.500' fontSize={'2xl'} fontWeight={700}>
+                    {dimensions.height}
+                  </Text>
+                  <Text fontSize={'xs'} textTransform={'uppercase'} color='gray' fontWeight={700}>
+                    {t.homeHero.dimensions.height}
                   </Text>
                 </Stack>
-
-                <Stack
-                  spacing={4}
-                  h='60px'
-                  direction={'row'}
-                  alignItems='center'
-                  divider={<Divider h={'20px'} orientation='vertical' borderColor='gray' borderWidth={1} />}
-                >
-                  <Stack alignItems={'center'} spacing={1}>
-                    <Text color='brand.500' fontSize={'2xl'} fontWeight={700}>
-                      {dimensions.height}
-                    </Text>
-                    <Text fontSize={'xs'} textTransform={'uppercase'} color='gray' fontWeight={700}>
-                      {t.homeHero.dimensions.height}
-                    </Text>
-                  </Stack>
-                  <Stack alignItems={'center'} spacing={1}>
-                    <Text color='brand.500' fontSize={'2xl'} fontWeight={700}>
-                      3.50m
-                    </Text>
-                    <Text fontSize={'xs'} textTransform={'uppercase'} color='gray' fontWeight={700}>
-                      {t.homeHero.dimensions.length}
-                    </Text>
-                  </Stack>
-                  <Stack alignItems={'center'} spacing={1}>
-                    <Text color='brand.500' fontSize={'2xl'} fontWeight={700}>
-                      1.80m
-                    </Text>
-                    <Text fontSize={'xs'} textTransform={'uppercase'} color='gray' fontWeight={700}>
-                      {t.homeHero.dimensions.width}
-                    </Text>
-                  </Stack>
+                <Stack alignItems={'center'} spacing={1}>
+                  <Text color='brand.500' fontSize={'2xl'} fontWeight={700}>
+                    3.50m
+                  </Text>
+                  <Text fontSize={'xs'} textTransform={'uppercase'} color='gray' fontWeight={700}>
+                    {t.homeHero.dimensions.length}
+                  </Text>
                 </Stack>
-              </Box>
-            )}
-          </Box>
-        </motion.div>
+                <Stack alignItems={'center'} spacing={1}>
+                  <Text color='brand.500' fontSize={'2xl'} fontWeight={700}>
+                    1.80m
+                  </Text>
+                  <Text fontSize={'xs'} textTransform={'uppercase'} color='gray' fontWeight={700}>
+                    {t.homeHero.dimensions.width}
+                  </Text>
+                </Stack>
+              </Stack>
+            </Box>
+          )}
+        </Box>
+        {/* </motion.div> */}
 
-        <motion.div
+        {/* <motion.div
           initial='hidden'
           animate='visible'
           variants={{
@@ -124,42 +126,49 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
               },
             },
           }}
-        >
-          <Box
-            flex={1}
-            sx={{
-              position: 'relative',
+        > */}
+        <Box
+          ref={elementRef}
+          // flex={1}
+          w={{ base: '100%', lg: '900px' }}
+          // w='900px'
+          // h='600px'
+          sx={{
+            position: 'relative',
 
-              '&:before, &:after': {
-                zIndex: -1,
-                position: 'absolute',
-                content: '""',
-                display: 'block',
-                width: '500px',
-                height: '500px',
-                borderRadius: '50% 10% 50% 20%',
-                filter: 'blur(50px)',
-                background: 'radial-gradient(circle at 50% 50%,rgba(255,155,125, 1), rgba(255,155,125, 0))',
-                opacity: { base: 0, md: 0.9 },
-              },
-            }}
-            _before={{
-              bottom: -100,
-              left: -50,
-            }}
-            _after={{
-              top: -100,
-              right: -100,
-            }}
-          >
-            <Image
-              width={900}
-              height={600}
-              src={image.data.attributes.url}
-              alt={image.data.attributes.alternativeText}
-            />
-          </Box>
-        </motion.div>
+            '&:before, &:after': {
+              zIndex: -1,
+              position: 'absolute',
+              content: '""',
+              display: 'block',
+              width: '500px',
+              height: '500px',
+              borderRadius: '50% 10% 50% 20%',
+              filter: 'blur(50px)',
+              background: 'radial-gradient(circle at 50% 50%,rgba(255,155,125, 1), rgba(255,155,125, 0))',
+              opacity: { base: 0, md: 0.9 },
+            },
+          }}
+          _before={{
+            bottom: -100,
+            left: -50,
+          }}
+          _after={{
+            top: -100,
+            right: -100,
+          }}
+        >
+          <Image
+            sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
+            layout='responsive'
+            objectFit='contain'
+            width={900}
+            height={600}
+            src={image.data.attributes.url}
+            alt={image.data.attributes.alternativeText}
+          />
+        </Box>
+        {/* </motion.div> */}
       </Stack>
     </Box>
   )

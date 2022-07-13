@@ -8,7 +8,7 @@ interface IRSLink {
 
 const RSLink: React.FC<IRSLink> = ({ to, children }) => {
   return (
-    <Link to={to} ignoreCancelEvents smooth={true} offset={-70} duration={600}>
+    <Link to={to} href='#' spy={true} ignoreCancelEvents smooth={true} offset={-70} duration={600}>
       {children}
     </Link>
   )

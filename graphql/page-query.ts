@@ -42,6 +42,7 @@ export const PAGE_QUERY = gql`
                 title
                 description
                 align
+                decoration
               }
             }
             ... on ComponentBlocksSection {
@@ -49,6 +50,7 @@ export const PAGE_QUERY = gql`
                 title
                 description
                 align
+                decoration
               }
               content
             }
@@ -57,6 +59,7 @@ export const PAGE_QUERY = gql`
                 title
                 description
                 align
+                decoration
               }
               images {
                 data {
@@ -73,6 +76,7 @@ export const PAGE_QUERY = gql`
                 title
                 description
                 align
+                decoration
               }
               accordion {
                 id
@@ -85,6 +89,7 @@ export const PAGE_QUERY = gql`
                 title
                 description
                 align
+                decoration
               }
               leftSection
               rightSection
@@ -94,8 +99,31 @@ export const PAGE_QUERY = gql`
                 title
                 align
                 description
+                decoration
               }
             }
+            ... on ComponentBlocksContacts {
+              title {
+                title
+                description
+                align
+                decoration
+              }
+            }
+          }
+          seo {
+            metaTitle
+            metaDescription
+            metaImage {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            keywords
+            canonicalURL
           }
         }
       }

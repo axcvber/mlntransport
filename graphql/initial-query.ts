@@ -49,7 +49,6 @@ export const INITIAL_QUERY = gql`
             address
             googleMapLink
           }
-          workTime
           socialNetworks {
             id
             link
@@ -78,10 +77,19 @@ export const INITIAL_QUERY = gql`
             }
           }
           googleAnalyticsTag
+          favicon {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          siteUrl
+          siteName
         }
       }
     }
-    services(locale: $locale) {
+    services(sort: "id:asc", locale: $locale) {
       data {
         id
         attributes {

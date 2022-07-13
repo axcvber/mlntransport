@@ -1,20 +1,21 @@
-import { Box, Button, Container, Heading as ChakraHeading, Stack, Text, VStack } from '@chakra-ui/react'
+import { Box, Button, Heading as ChakraHeading, Text, VStack } from '@chakra-ui/react'
+import Image from 'next/image'
 import React from 'react'
+import { FiCornerRightDown } from 'react-icons/fi'
+import useLocale from '../../hooks/useLocale'
+import RSLink from '../RSLink.tsx'
 
 const Heading = ({ headingTitle, headingDescription, background, contactButton }: any) => {
+  const t = useLocale()
+
   return (
     <Box
       w='100%'
       h='400px'
-      bgImage={`url('${background?.data.attributes.url}')`}
-      bgSize='cover'
-      bgPosition='center'
-      bgRepeat='no-repeat'
       position={'relative'}
       borderRadius={10}
       overflow='hidden'
       color='#fff'
-      zIndex={2}
       boxShadow='md'
       _after={{
         content: '""',
@@ -24,21 +25,31 @@ const Heading = ({ headingTitle, headingDescription, background, contactButton }
         position: 'absolute',
         top: 0,
         left: 0,
-        bg: 'rgba(0,0,0,0.5)',
-        zIndex: -1,
+        bg: 'rgba(0,0,0,0.6)',
       }}
     >
-      <Box px={5} py={20} h='100%'>
-        <VStack h='100%' justifyContent={'flex-end'} alignItems='flex-start'>
+      <Box px={6} py={20} h='100%' position={'relative'} zIndex={1}>
+        <VStack h='100%' spacing={4} justifyContent={'flex-end'} alignItems='flex-start'>
           <ChakraHeading textTransform={'uppercase'}>{headingTitle}</ChakraHeading>
-          {headingDescription && <Text maxW={300}>{headingDescription}</Text>}
+          {headingDescription && <Text maxW={400}>{headingDescription}</Text>}
           {contactButton && (
-            <Button textTransform={'uppercase'} colorScheme={'brand'}>
-              Submit a request
-            </Button>
+            <RSLink to='form'>
+              <Button textTransform={'uppercase'} colorScheme={'brand'} rightIcon={<FiCornerRightDown fontSize={22} />}>
+                {t.button.submitARequest}
+              </Button>
+            </RSLink>
           )}
         </VStack>
       </Box>
+      <Image
+        priority
+        src={background?.data.attributes.url}
+        placeholder='blur'
+        blurDataURL={background?.data.attributes.url}
+        layout='fill'
+        objectFit='cover'
+        alt={background?.data.attributes.alternativeText}
+      />
     </Box>
   )
 }

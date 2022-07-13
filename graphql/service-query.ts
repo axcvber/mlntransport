@@ -9,7 +9,6 @@ export const SERVICE_QUERY = gql`
           blocks {
             __typename
             ... on ComponentBlocksHeading {
-              id
               headingTitle
               headingDescription
               background {
@@ -26,9 +25,25 @@ export const SERVICE_QUERY = gql`
               title {
                 title
                 align
+                description
+                decoration
               }
               content
             }
+          }
+          seo {
+            metaTitle
+            metaDescription
+            metaImage {
+              data {
+                attributes {
+                  url
+                  alternativeText
+                }
+              }
+            }
+            keywords
+            canonicalURL
           }
         }
       }

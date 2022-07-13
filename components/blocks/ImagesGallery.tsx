@@ -1,12 +1,39 @@
-import { Box, chakra, Grid, GridItem } from '@chakra-ui/react'
+import {
+  Box,
+  chakra,
+  Grid,
+  GridItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalOverlay,
+  useDisclosure,
+} from '@chakra-ui/react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useCallback, useState } from 'react'
+import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import BlockTitle from '../BlockTitle'
 
 const ImagesGallery = ({ title, images }: any) => {
   console.log('images', images)
+  const [isZoomed, setIsZoomed] = useState(false)
+  const [zoomedId, setZoomedId] = useState()
+
+  const handleImgLoad = useCallback(() => {
+    setIsZoomed(true)
+  }, [])
+
+  const handleZoomChange = useCallback((shouldZoom: any, id: any) => {
+    setZoomedId(id)
+    setIsZoomed(shouldZoom)
+  }, [])
+  // const onFullImage = (item: any) => {
+  //   setZoomedImg(item)
+  //   onOpen()
+  // }
 
   return (
     <>
@@ -29,10 +56,13 @@ const ImagesGallery = ({ title, images }: any) => {
       >
         {images.data.map((item: any) => (
           <GridItem
+            onClick={() => handleZoomChange(!isZoomed, item.id)}
             key={item.id}
             colSpan={{ base: 2, sm: 2, md: 2, lg: 1 }}
             rowSpan={{ base: 1, sm: 1, md: 2, lg: 1 }}
+            boxShadow='0px 0px 14px -3px rgba(0,0,0,0.43)'
             sx={{
+              position: 'relative',
               overflow: 'hidden',
               borderRadius: '5px',
               '&:nth-of-type(1)': {
@@ -48,13 +78,51 @@ const ImagesGallery = ({ title, images }: any) => {
                 position: 'relative',
                 width: '100%',
                 height: '100%',
+                // background: 'red',
               }}
             >
-              <Image layout='fill' objectFit='cover' src={item.attributes.url} alt={item.attributes.alternativeText} />
+              {/* <ControlledZoom
+              overlayBgColorEnd={'rgba(0,0,0, 0.8)'}
+              isZoomed={isZoomed}
+              onZoomChange={handleZoomChange}
+              wrapStyle={{
+                position: 'relative',
+                width: '100%',
+                height: '100%',
+                background: 'red',
+              }}
+            > */}
+              <Image
+                priority
+                layout='fill'
+                objectFit={isZoomed && item.id === zoomedId ? 'contain' : 'cover'}
+                // blurDataURL={item.attributes.url}
+                // placeholder='blur'
+                src={item.attributes.url}
+                alt={item.attributes.alternativeText}
+              />
             </Zoom>
+            {/* </ControlledZoom> */}
           </GridItem>
         ))}
       </Grid>
+
+      {/* <Modal size='4xl' isCentered blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent width={'100%'} h='100%' position={'relative'}>
+          <ModalCloseButton />
+          <ModalBody>
+            <Image
+              layout='fill'
+              objectFit='contain'
+              blurDataURL={zoomedImg?.attributes.url || ''}
+              placeholder='blur'
+              src={zoomedImg?.attributes.url || ''}
+              alt={zoomedImg?.attributes.alternativeText || ''}
+            />
+          </ModalBody>
+        </ModalContent>
+      </Modal> */}
     </>
   )
 }

@@ -8,7 +8,7 @@ const Markdown = ({ content }: any) => {
   return (
     <RMarkdown
       sx={{
-        px: 4,
+        // px: 4,
         '*': {
           mb: 3,
           color: 'gray.600',

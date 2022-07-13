@@ -1,4 +1,4 @@
-import { Box, Button, Heading, Stack, Text, useToast, VStack } from '@chakra-ui/react'
+import { Box, Button, Heading, HStack, Stack, Text, useToast, VStack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Field from '../form/Field'
@@ -6,16 +6,19 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Select from '../form/Select'
 import PhoneField from '../form/PhoneField'
-import { FaPhoneAlt } from 'react-icons/fa'
+import { FaInstagram, FaPhoneAlt, FaViber } from 'react-icons/fa'
 import { IoMail, IoLocationSharp } from 'react-icons/io5'
 import axios from 'axios'
 import { useInView } from 'react-intersection-observer'
-import { FiArrowUpRight, FiMail, FiMessageSquare, FiPackage, FiPhone, FiUser } from 'react-icons/fi'
+import { FiArrowUpRight, FiMail, FiMessageSquare, FiPackage, FiPhone, FiTwitter, FiUser } from 'react-icons/fi'
 import useLocale from '../../hooks/useLocale'
 import Textarea from '../form/Textarea'
 import ContactInfoButton from '../form/components/ContactInfoButton'
 import useAppContext from '../../hooks/useAppContext'
 import { useAnimation, motion } from 'framer-motion'
+import { TbBrandFacebook, TbBrandTelegram } from 'react-icons/tb'
+import { BsWhatsapp } from 'react-icons/bs'
+import getSocialIcon from '../../utils/getSocialIcon'
 
 export interface IContactFormInputs {
   fullName: string
@@ -67,6 +70,7 @@ const ContactForm = () => {
   const { initialData } = useAppContext()
   const contacts = initialData?.contact?.data?.attributes as any
   const servicesArr = initialData?.services?.data
+  const icons = initialData?.contact?.data?.attributes?.socialNetworks
 
   // const controls = useAnimation()
   // const [ref, inView] = useInView()
@@ -78,7 +82,7 @@ const ContactForm = () => {
 
   const onSubmit: SubmitHandler<IContactFormInputs> = async (data) => {
     try {
-      await axios.post(`${process.env.SERVER_URL}/api/ezforms/submit`, { formData: data })
+      await axios.post(`https://mlntransport-admin.herokuapp.com/api/ezforms/submit`, { formData: data })
       toast({
         description: t.form.notify.successFormSend,
         status: 'success',
@@ -133,14 +137,17 @@ const ContactForm = () => {
               position: 'relative',
               overflow: 'hidden',
               zIndex: 1,
+              '&:before, &:after': {
+                content: '""',
+                display: 'block',
+                borderRadius: '50%',
+                position: 'absolute',
+                zIndex: -1,
+              },
             }}
             _after={{
-              content: '""',
-              display: 'block',
               width: '100px',
               height: '100px',
-              borderRadius: '50%',
-              position: 'absolute',
               bottom: '20px',
               right: '20px',
               bg: 'brand.300',
@@ -148,26 +155,21 @@ const ContactForm = () => {
               opacity: 0.6,
             }}
             _before={{
-              content: '""',
-              display: 'block',
               width: '200px',
               height: '200px',
-              borderRadius: '50%',
-              position: 'absolute',
               bottom: '-100px',
               right: '-100px',
               bg: 'brand.600',
-              zIndex: -1,
             }}
           >
-            <VStack mb={8} alignItems='flex-start'>
+            <VStack mb={6} alignItems='flex-start'>
               <Heading size='lg' as='h3' wordBreak={'break-word'}>
                 {t.form.info.title}
               </Heading>
               <Text fontSize={'sm'}>{t.form.info.subtitle}</Text>
             </VStack>
 
-            <VStack spacing={4} alignItems='flex-start' flexWrap={'wrap'}>
+            <VStack spacing={3} alignItems='flex-start' flexWrap={'wrap'}>
               {contacts.phoneNumbers.map((item: any) => (
                 <ContactInfoButton key={item.id} link={`tel:${item?.phone}`} label={item.phone} icon={<FaPhoneAlt />} />
               ))}
@@ -180,6 +182,35 @@ const ContactForm = () => {
                 />
               )}
             </VStack>
+            <HStack mt={6}>
+              {icons?.map((item) => (
+                <a key={item?.id} href={item?.link} target='_blank' rel='noopener noreferrer'>
+                  <Box
+                    sx={{
+                      w: '35px',
+                      h: '35px',
+                      borderRadius: '50%',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      cursor: 'pointer',
+                      transition: 'all 0.2s ease',
+                      bg: 'brand.50',
+                      '&:hover': {
+                        bg: '#fff',
+                        transform: 'translateY(-2px)',
+                      },
+                      'svg': {
+                        color: 'brand.500',
+                        fontSize: 18,
+                      },
+                    }}
+                  >
+                    {getSocialIcon(item?.icon)}
+                  </Box>
+                </a>
+              ))}
+            </HStack>
           </Box>
 
           <Box px={{ base: 2, md: 2, lg: 10 }} pt={2} flex={1}>

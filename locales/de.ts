@@ -1,26 +1,4 @@
 const de = {
-  navLinks: [
-    {
-      title: 'Startseite',
-      path: '/',
-    },
-    {
-      title: 'Über uns',
-      path: '/about-us',
-    },
-    {
-      title: 'Dienstleistungen',
-      path: '/services',
-    },
-    {
-      title: 'Preise',
-      path: '/prices',
-    },
-    {
-      title: 'Kontakte',
-      path: '/contacts',
-    },
-  ],
   homeHero: {
     dimensions: {
       title: 'Maße des Transporter',
@@ -30,9 +8,6 @@ const de = {
     },
   },
   section: {
-    weProvide: {
-      title: 'Wir bieten',
-    },
     contactUs: {
       title: 'Kontaktiere uns',
       subtitle: 'Wir freuen uns auf Ihre Anfrage und beantworten diese so schnell wie möglich.',
@@ -42,6 +17,8 @@ const de = {
     contactUs: 'Kontaktiere uns',
     seePrices: 'Siehe preise',
     sendForm: 'Formular abschicken',
+    submitARequest: 'Anfrage einreichen',
+    aboutService: 'Über Service',
   },
   link: {
     readMore: 'Mehr lesen',
@@ -96,6 +73,9 @@ const de = {
     title: 'Ooops! Seite nicht gefunden',
     subtitle: 'Diese Seite existiert nicht oder wurde entfernt!',
     btn: 'Zurück zu Home',
+  },
+  error: {
+    fetchError: 'Es ist ein Fehler bei der Bearbeitung Ihrer Anfrage aufgetreten',
   },
 }
 

@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import BlockTitle from '../BlockTitle'
+import Markdown from '../Markdown'
 
 const Accordion = ({ accordion, title }: any) => {
   return (
@@ -18,15 +19,27 @@ const Accordion = ({ accordion, title }: any) => {
       <ChakraAccordion allowMultiple>
         {accordion &&
           accordion.map((item: any) => (
-            <AccordionItem key={item.id}>
-              <AccordionButton borderRadius={5}>
-                <Text as='h6' flex='1' textAlign='left' color='gray.600' fontWeight={500}>
+            <AccordionItem
+              // my={5}
+              key={item.id}
+              // border='none'
+              // bg='#fff'
+              // borderRadius={5}
+              // boxShadow={'0px 0px 17px -2px rgba(0,0,0,0.3)'}
+            >
+              <AccordionButton
+                // color='gray.600'
+                // borderTopLeftRadius={5}
+                // borderTopRightRadius={5}
+                _expanded={{ bg: 'brand.400', color: '#fff' }}
+              >
+                <Text as='h6' flex='1' textAlign='left' fontWeight={500}>
                   {item.title}
                 </Text>
                 <AccordionIcon />
               </AccordionButton>
-              <AccordionPanel pb={4}>
-                <Text color='gray.500'>{item.content}</Text>
+              <AccordionPanel pb={2}>
+                <Markdown content={item.content} />
               </AccordionPanel>
             </AccordionItem>
           ))}

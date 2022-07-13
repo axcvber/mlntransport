@@ -15,7 +15,7 @@ class MyDocument extends Document {
           {/* <link href='https://fonts.googleapis.com/css2?family=Montserrat&display=swap' rel='stylesheet' /> */}
         </Head>
         <body>
-          <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+          {/* <ColorModeScript initialColorMode={theme.config.initialColorMode} /> */}
           <Main />
           <NextScript />
         </body>

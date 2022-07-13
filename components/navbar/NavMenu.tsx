@@ -25,7 +25,7 @@ const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { initialData } = useAppContext()
   const navLinks = initialData?.navbar?.data?.attributes?.navLinks
-  console.log('path', router.asPath)
+  console.log('render nav menu')
 
   const navLinkStyles = {
     position: 'relative',
@@ -140,49 +140,5 @@ const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
     </List>
   )
 }
-
-const NavLink = chakra('a', {
-  baseStyle: {
-    position: 'relative',
-    userSelect: 'none',
-    fontWeight: 500,
-    fontSize: 'lg',
-    '&::before, &::after': {
-      content: '""',
-      display: 'block',
-      position: 'absolute',
-      width: '100%',
-      height: '2px',
-      // borderRadius: '50%',
-      background: 'brand.500',
-      margin: 'auto',
-      top: '110%',
-      left: 0,
-      pointerEvents: 'none',
-      opacity: 0,
-      transformOrigin: '50% 0%',
-      transform: 'translate3d(0, 3px, 0)',
-      transitionProperty: 'transform, opacity',
-      transitionDuration: '0.3s',
-      transitionTimingFunction: 'cubic-bezier(0.2, 1, 0.8, 1)',
-    },
-    // '&::after ': {
-    //   top: 'calc(105% + 6px)',
-    //   width: '70%',
-    //   left: '15%',
-    // },
-    '&:hover, &.active': {
-      color: 'brand.500',
-      '&::before, &::after': {
-        opacity: 1,
-        transform: 'translate3d(0, 0, 0)',
-        transitionTimingFunction: 'cubic-bezier(0.2, 0, 0.3, 1)',
-      },
-    },
-    '&.active-menu-link': {
-      color: 'brand.500',
-    },
-  },
-})
 
 export default NavMenu

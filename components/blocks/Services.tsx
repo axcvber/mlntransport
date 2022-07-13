@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import BlockTitle from '../BlockTitle'
 import useLocale from '../../hooks/useLocale'
+import ErrorAlert from '../ErrorAlert'
 
 const Services = ({ title }: any) => {
   const router = useRouter()
@@ -17,7 +18,9 @@ const Services = ({ title }: any) => {
     },
     notifyOnNetworkStatusChange: true,
   })
-  if (error) return <Box>Error</Box>
+  if (error) return <ErrorAlert />
+  console.log('data services', data)
+
   return (
     <Box>
       {title && <BlockTitle title={title} />}
@@ -32,7 +35,7 @@ const Services = ({ title }: any) => {
                     startColor='gray.100'
                     endColor='gray.200'
                     h={'195px'}
-                    borderRadius={'2xl'}
+                    borderRadius={10}
                     sx={{ boxShadow: '0 0 78px -13px #b7b7b7' }}
                   />
                 </GridItem>
@@ -41,7 +44,7 @@ const Services = ({ title }: any) => {
               <GridItem
                 key={item.id}
                 bg='white'
-                borderRadius={'2xl'}
+                borderRadius={10}
                 sx={{
                   position: 'relative',
                   zIndex: 2,

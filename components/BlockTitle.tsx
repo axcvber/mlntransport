@@ -24,32 +24,28 @@ const BlockTitle: React.FC<{ title: any }> = ({ title }) => {
         textAlign={title.align}
         sx={{
           position: 'relative',
-          py: 2,
-          px: 4,
+          py: title.decoration ? 2 : 0,
+          px: title.decoration ? 4 : 0,
+          '&:before, &:after': {
+            content: '""',
+            display: title.decoration ? 'block' : 'none',
+            position: 'absolute',
+            w: '25px',
+            h: '25px',
+            borderColor: 'brand.500',
+          },
         }}
         _before={{
-          content: '""',
-          display: 'block',
-          position: 'absolute',
           top: 0,
           left: 0,
-          w: '25px',
-          h: '25px',
           borderTop: '3px solid ',
           borderLeft: '3px solid ',
-          borderColor: 'brand.500',
         }}
         _after={{
-          content: '""',
-          display: 'block',
-          position: 'absolute',
           bottom: 0,
           right: 0,
-          w: '25px',
-          h: '25px',
           borderBottom: '3px solid ',
           borderRight: '3px solid ',
-          borderColor: 'brand.500',
         }}
       >
         {title.title}

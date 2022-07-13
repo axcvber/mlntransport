@@ -3,9 +3,9 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 import { Maybe, PageBlocksDynamicZone } from '../generated'
 // import Accordion from './blocks/Accordion'
-import Contacts from './blocks/Contacts'
-import DoubleSection from './blocks/DoubleSection'
-import Prices from './blocks/Prices'
+// import Contacts from './blocks/Contacts'
+// import DoubleSection from './blocks/DoubleSection'
+// import Prices from './blocks/Prices'
 // import Heading from './blocks/Heading'
 // import HomeHero from './blocks/HomeHero'
 // import ImagesGallery from './blocks/ImagesGallery'
@@ -18,6 +18,9 @@ const Heading = dynamic(() => import('./blocks/Heading'))
 const Accordion = dynamic(() => import('./blocks/Accordion'))
 const ImagesGallery = dynamic(() => import('./blocks/ImagesGallery'))
 const Services = dynamic(() => import('./blocks/Services'))
+const Prices = dynamic(() => import('./blocks/Prices'))
+const DoubleSection = dynamic(() => import('./blocks/DoubleSection'))
+const Contacts = dynamic(() => import('./blocks/Contacts'))
 
 const getBlockComponent = ({ __typename, ...rest }: any, index: any) => {
   let Block
@@ -48,6 +51,9 @@ const getBlockComponent = ({ __typename, ...rest }: any, index: any) => {
 
     case 'ComponentBlocksPrices':
       Block = Prices
+      break
+    case 'ComponentBlocksContacts':
+      Block = Contacts
       break
   }
 

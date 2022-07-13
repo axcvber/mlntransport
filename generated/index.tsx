@@ -47,6 +47,56 @@ export type BooleanFilterInput = {
   startsWith?: InputMaybe<Scalars['Boolean']>;
 };
 
+export type ClientManagement = {
+  __typename?: 'ClientManagement';
+  address: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  date: Scalars['DateTime'];
+  done?: Maybe<Scalars['Boolean']>;
+  fullname: Scalars['String'];
+  phone: Scalars['String'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ClientManagementEntity = {
+  __typename?: 'ClientManagementEntity';
+  attributes?: Maybe<ClientManagement>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ClientManagementEntityResponse = {
+  __typename?: 'ClientManagementEntityResponse';
+  data?: Maybe<ClientManagementEntity>;
+};
+
+export type ClientManagementEntityResponseCollection = {
+  __typename?: 'ClientManagementEntityResponseCollection';
+  data: Array<ClientManagementEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ClientManagementFiltersInput = {
+  address?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ClientManagementFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  date?: InputMaybe<DateTimeFilterInput>;
+  done?: InputMaybe<BooleanFilterInput>;
+  fullname?: InputMaybe<StringFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ClientManagementFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ClientManagementFiltersInput>>>;
+  phone?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ClientManagementInput = {
+  address?: InputMaybe<Scalars['String']>;
+  date?: InputMaybe<Scalars['DateTime']>;
+  done?: InputMaybe<Scalars['Boolean']>;
+  fullname?: InputMaybe<Scalars['String']>;
+  phone?: InputMaybe<Scalars['String']>;
+};
+
 export type ComponentAccordionFaq = {
   __typename?: 'ComponentAccordionFaq';
   content: Scalars['String'];
@@ -79,6 +129,7 @@ export type ComponentBlocksAccordionAccordionArgs = {
 export type ComponentBlocksContacts = {
   __typename?: 'ComponentBlocksContacts';
   id: Scalars['ID'];
+  title?: Maybe<ComponentTitleTitle>;
 };
 
 export type ComponentBlocksDoubleSection = {
@@ -229,9 +280,39 @@ export type ComponentMenuLinkFiltersInput = {
   title?: InputMaybe<StringFilterInput>;
 };
 
+export type ComponentSeoSeo = {
+  __typename?: 'ComponentSeoSeo';
+  canonicalURL: Scalars['String'];
+  id: Scalars['ID'];
+  keywords: Scalars['String'];
+  metaDescription: Scalars['String'];
+  metaImage?: Maybe<UploadFileEntityResponse>;
+  metaTitle: Scalars['String'];
+};
+
+export type ComponentSeoSeoFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentSeoSeoFiltersInput>>>;
+  canonicalURL?: InputMaybe<StringFilterInput>;
+  keywords?: InputMaybe<StringFilterInput>;
+  metaDescription?: InputMaybe<StringFilterInput>;
+  metaTitle?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<ComponentSeoSeoFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentSeoSeoFiltersInput>>>;
+};
+
+export type ComponentSeoSeoInput = {
+  canonicalURL?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  keywords?: InputMaybe<Scalars['String']>;
+  metaDescription?: InputMaybe<Scalars['String']>;
+  metaImage?: InputMaybe<Scalars['ID']>;
+  metaTitle?: InputMaybe<Scalars['String']>;
+};
+
 export type ComponentTitleTitle = {
   __typename?: 'ComponentTitleTitle';
   align?: Maybe<Enum_Componenttitletitle_Align>;
+  decoration?: Maybe<Scalars['Boolean']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   title: Scalars['String'];
@@ -243,10 +324,8 @@ export type Contact = {
   createdAt?: Maybe<Scalars['DateTime']>;
   email: Scalars['String'];
   phoneNumbers: Array<Maybe<ComponentContactsPhoneNumbers>>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
   socialNetworks: Array<Maybe<ComponentContactsSocialNetworks>>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-  workTime?: Maybe<Scalars['String']>;
 };
 
 
@@ -278,9 +357,7 @@ export type ContactInput = {
   address?: InputMaybe<ComponentContactsAddressInput>;
   email?: InputMaybe<Scalars['String']>;
   phoneNumbers?: InputMaybe<Array<InputMaybe<ComponentContactsPhoneNumbersInput>>>;
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
   socialNetworks?: InputMaybe<Array<InputMaybe<ComponentContactsSocialNetworksInput>>>;
-  workTime?: InputMaybe<Scalars['String']>;
 };
 
 export type DateTimeFilterInput = {
@@ -375,6 +452,7 @@ export type EzformsSubmission = {
   __typename?: 'EzformsSubmission';
   createdAt?: Maybe<Scalars['DateTime']>;
   data?: Maybe<Scalars['JSON']>;
+  processed?: Maybe<Scalars['Boolean']>;
   score?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -403,12 +481,14 @@ export type EzformsSubmissionFiltersInput = {
   id?: InputMaybe<IdFilterInput>;
   not?: InputMaybe<EzformsSubmissionFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<EzformsSubmissionFiltersInput>>>;
+  processed?: InputMaybe<BooleanFilterInput>;
   score?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type EzformsSubmissionInput = {
   data?: InputMaybe<Scalars['JSON']>;
+  processed?: InputMaybe<Scalars['Boolean']>;
   score?: InputMaybe<Scalars['String']>;
 };
 
@@ -441,15 +521,17 @@ export type FloatFilterInput = {
   startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type GenericMorph = ComponentAccordionFaq | ComponentBlocksAccordion | ComponentBlocksContacts | ComponentBlocksDoubleSection | ComponentBlocksHeading | ComponentBlocksHomeHero | ComponentBlocksImagesGallery | ComponentBlocksPrices | ComponentBlocksSection | ComponentBlocksServices | ComponentContactsAddress | ComponentContactsPhoneNumbers | ComponentContactsSocialNetworks | ComponentDimensionsDimensions | ComponentMenuDropdown | ComponentMenuLink | ComponentTitleTitle | Contact | EzformsRecipient | EzformsSubmission | Global | I18NLocale | Navbar | Page | Price | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+export type GenericMorph = ClientManagement | ComponentAccordionFaq | ComponentBlocksAccordion | ComponentBlocksContacts | ComponentBlocksDoubleSection | ComponentBlocksHeading | ComponentBlocksHomeHero | ComponentBlocksImagesGallery | ComponentBlocksPrices | ComponentBlocksSection | ComponentBlocksServices | ComponentContactsAddress | ComponentContactsPhoneNumbers | ComponentContactsSocialNetworks | ComponentDimensionsDimensions | ComponentMenuDropdown | ComponentMenuLink | ComponentSeoSeo | ComponentTitleTitle | Contact | EzformsRecipient | EzformsSubmission | Global | I18NLocale | Navbar | Page | Price | Service | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
 
 export type Global = {
   __typename?: 'Global';
   createdAt?: Maybe<Scalars['DateTime']>;
   darkLogo: UploadFileEntityResponse;
+  favicon: UploadFileEntityResponse;
   googleAnalyticsTag: Scalars['String'];
   lightLogo: UploadFileEntityResponse;
-  publishedAt?: Maybe<Scalars['DateTime']>;
+  siteName: Scalars['String'];
+  siteUrl: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -466,9 +548,11 @@ export type GlobalEntityResponse = {
 
 export type GlobalInput = {
   darkLogo?: InputMaybe<Scalars['ID']>;
+  favicon?: InputMaybe<Scalars['ID']>;
   googleAnalyticsTag?: InputMaybe<Scalars['String']>;
   lightLogo?: InputMaybe<Scalars['ID']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  siteName?: InputMaybe<Scalars['String']>;
+  siteUrl?: InputMaybe<Scalars['String']>;
 };
 
 export type I18NLocale = {
@@ -578,6 +662,7 @@ export type JsonFilterInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createClientManagement?: Maybe<ClientManagementEntityResponse>;
   createEzformsRecipient?: Maybe<EzformsRecipientEntityResponse>;
   createEzformsSubmission?: Maybe<EzformsSubmissionEntityResponse>;
   createNavbarLocalization?: Maybe<NavbarEntityResponse>;
@@ -592,6 +677,7 @@ export type Mutation = {
   createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
   createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteClientManagement?: Maybe<ClientManagementEntityResponse>;
   deleteContact?: Maybe<ContactEntityResponse>;
   deleteEzformsRecipient?: Maybe<EzformsRecipientEntityResponse>;
   deleteEzformsSubmission?: Maybe<EzformsSubmissionEntityResponse>;
@@ -616,6 +702,7 @@ export type Mutation = {
   removeFile?: Maybe<UploadFileEntityResponse>;
   /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
   resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateClientManagement?: Maybe<ClientManagementEntityResponse>;
   updateContact?: Maybe<ContactEntityResponse>;
   updateEzformsRecipient?: Maybe<EzformsRecipientEntityResponse>;
   updateEzformsSubmission?: Maybe<EzformsSubmissionEntityResponse>;
@@ -631,6 +718,11 @@ export type Mutation = {
   /** Update an existing user */
   updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
   upload: UploadFileEntityResponse;
+};
+
+
+export type MutationCreateClientManagementArgs = {
+  data: ClientManagementInput;
 };
 
 
@@ -702,6 +794,11 @@ export type MutationCreateUsersPermissionsRoleArgs = {
 
 export type MutationCreateUsersPermissionsUserArgs = {
   data: UsersPermissionsUserInput;
+};
+
+
+export type MutationDeleteClientManagementArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -793,6 +890,12 @@ export type MutationResetPasswordArgs = {
 };
 
 
+export type MutationUpdateClientManagementArgs = {
+  data: ClientManagementInput;
+  id: Scalars['ID'];
+};
+
+
 export type MutationUpdateContactArgs = {
   data: ContactInput;
 };
@@ -880,13 +983,7 @@ export type Navbar = {
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<NavbarRelationResponseCollection>;
   navLinks: Array<Maybe<NavbarNavLinksDynamicZone>>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
-};
-
-
-export type NavbarLocalizationsArgs = {
-  publicationState?: InputMaybe<PublicationState>;
 };
 
 export type NavbarEntity = {
@@ -902,7 +999,6 @@ export type NavbarEntityResponse = {
 
 export type NavbarInput = {
   navLinks?: InputMaybe<Array<Scalars['NavbarNavLinksDynamicZoneInput']>>;
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
 export type NavbarNavLinksDynamicZone = ComponentMenuDropdown | ComponentMenuLink | Error;
@@ -918,7 +1014,7 @@ export type Page = {
   createdAt?: Maybe<Scalars['DateTime']>;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<PageRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
+  seo: ComponentSeoSeo;
   slug: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
@@ -927,7 +1023,6 @@ export type Page = {
 export type PageLocalizationsArgs = {
   filters?: InputMaybe<PageFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -958,14 +1053,14 @@ export type PageFiltersInput = {
   localizations?: InputMaybe<PageFiltersInput>;
   not?: InputMaybe<PageFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<PageFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  seo?: InputMaybe<ComponentSeoSeoFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type PageInput = {
   blocks?: InputMaybe<Array<Scalars['PageBlocksDynamicZoneInput']>>;
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  seo?: InputMaybe<ComponentSeoSeoInput>;
   slug?: InputMaybe<Scalars['String']>;
 };
 
@@ -992,10 +1087,12 @@ export type PaginationArg = {
 export type Price = {
   __typename?: 'Price';
   createdAt?: Maybe<Scalars['DateTime']>;
+  description: Scalars['String'];
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<PriceRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
-  title?: Maybe<Scalars['String']>;
+  priceTitle: Scalars['String'];
+  service?: Maybe<ServiceEntityResponse>;
+  subtitle?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -1003,7 +1100,6 @@ export type Price = {
 export type PriceLocalizationsArgs = {
   filters?: InputMaybe<PriceFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1027,19 +1123,23 @@ export type PriceEntityResponseCollection = {
 export type PriceFiltersInput = {
   and?: InputMaybe<Array<InputMaybe<PriceFiltersInput>>>;
   createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
   id?: InputMaybe<IdFilterInput>;
   locale?: InputMaybe<StringFilterInput>;
   localizations?: InputMaybe<PriceFiltersInput>;
   not?: InputMaybe<PriceFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<PriceFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
-  title?: InputMaybe<StringFilterInput>;
+  priceTitle?: InputMaybe<StringFilterInput>;
+  service?: InputMaybe<ServiceFiltersInput>;
+  subtitle?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type PriceInput = {
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
-  title?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  priceTitle?: InputMaybe<Scalars['String']>;
+  service?: InputMaybe<Scalars['ID']>;
+  subtitle?: InputMaybe<Scalars['String']>;
 };
 
 export type PriceRelationResponseCollection = {
@@ -1047,13 +1147,10 @@ export type PriceRelationResponseCollection = {
   data: Array<PriceEntity>;
 };
 
-export enum PublicationState {
-  Live = 'LIVE',
-  Preview = 'PREVIEW'
-}
-
 export type Query = {
   __typename?: 'Query';
+  clientManagement?: Maybe<ClientManagementEntityResponse>;
+  clientManagements?: Maybe<ClientManagementEntityResponseCollection>;
   contact?: Maybe<ContactEntityResponse>;
   ezformsRecipient?: Maybe<EzformsRecipientEntityResponse>;
   ezformsRecipients?: Maybe<EzformsRecipientEntityResponseCollection>;
@@ -1079,8 +1176,15 @@ export type Query = {
 };
 
 
-export type QueryContactArgs = {
-  publicationState?: InputMaybe<PublicationState>;
+export type QueryClientManagementArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type QueryClientManagementsArgs = {
+  filters?: InputMaybe<ClientManagementFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
@@ -1108,11 +1212,6 @@ export type QueryEzformsSubmissionsArgs = {
 };
 
 
-export type QueryGlobalArgs = {
-  publicationState?: InputMaybe<PublicationState>;
-};
-
-
 export type QueryI18NLocaleArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
@@ -1127,7 +1226,6 @@ export type QueryI18NLocalesArgs = {
 
 export type QueryNavbarArgs = {
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
-  publicationState?: InputMaybe<PublicationState>;
 };
 
 
@@ -1141,7 +1239,6 @@ export type QueryPagesArgs = {
   filters?: InputMaybe<PageFiltersInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1156,7 +1253,6 @@ export type QueryPricesArgs = {
   filters?: InputMaybe<PriceFiltersInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1171,7 +1267,6 @@ export type QueryServicesArgs = {
   filters?: InputMaybe<ServiceFiltersInput>;
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1223,7 +1318,7 @@ export type Service = {
   icon: UploadFileEntityResponse;
   locale?: Maybe<Scalars['String']>;
   localizations?: Maybe<ServiceRelationResponseCollection>;
-  publishedAt?: Maybe<Scalars['DateTime']>;
+  seo: ComponentSeoSeo;
   slug: Scalars['String'];
   title: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
@@ -1233,11 +1328,10 @@ export type Service = {
 export type ServiceLocalizationsArgs = {
   filters?: InputMaybe<ServiceFiltersInput>;
   pagination?: InputMaybe<PaginationArg>;
-  publicationState?: InputMaybe<PublicationState>;
   sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ServiceBlocksDynamicZone = ComponentBlocksAccordion | ComponentBlocksHeading | ComponentBlocksImagesGallery | ComponentBlocksSection | ComponentBlocksServices | Error;
+export type ServiceBlocksDynamicZone = ComponentBlocksAccordion | ComponentBlocksDoubleSection | ComponentBlocksHeading | ComponentBlocksImagesGallery | ComponentBlocksSection | ComponentBlocksServices | Error;
 
 export type ServiceEntity = {
   __typename?: 'ServiceEntity';
@@ -1264,7 +1358,7 @@ export type ServiceFiltersInput = {
   localizations?: InputMaybe<ServiceFiltersInput>;
   not?: InputMaybe<ServiceFiltersInput>;
   or?: InputMaybe<Array<InputMaybe<ServiceFiltersInput>>>;
-  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  seo?: InputMaybe<ComponentSeoSeoFiltersInput>;
   slug?: InputMaybe<StringFilterInput>;
   title?: InputMaybe<StringFilterInput>;
   updatedAt?: InputMaybe<DateTimeFilterInput>;
@@ -1273,7 +1367,7 @@ export type ServiceFiltersInput = {
 export type ServiceInput = {
   blocks?: InputMaybe<Array<Scalars['ServiceBlocksDynamicZoneInput']>>;
   icon?: InputMaybe<Scalars['ID']>;
-  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  seo?: InputMaybe<ComponentSeoSeoInput>;
   slug?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
 };
@@ -1608,7 +1702,7 @@ export type InitialDataQueryVariables = Exact<{
 }>;
 
 
-export type InitialDataQuery = { __typename?: 'Query', navbar?: { __typename?: 'NavbarEntityResponse', data?: { __typename?: 'NavbarEntity', attributes?: { __typename?: 'Navbar', navLinks: Array<{ __typename: 'ComponentMenuDropdown', id: string, label: string, Link: Array<{ __typename?: 'ComponentMenuLink', id: string, title: string, page?: { __typename?: 'PageEntityResponse', data?: { __typename?: 'PageEntity', attributes?: { __typename?: 'Page', slug: string } | null } | null } | null } | null> } | { __typename: 'ComponentMenuLink', id: string, title: string, page?: { __typename?: 'PageEntityResponse', data?: { __typename?: 'PageEntity', attributes?: { __typename?: 'Page', slug: string } | null } | null } | null } | { __typename: 'Error' } | null> } | null } | null } | null, contact?: { __typename?: 'ContactEntityResponse', data?: { __typename?: 'ContactEntity', attributes?: { __typename?: 'Contact', email: string, workTime?: string | null, phoneNumbers: Array<{ __typename?: 'ComponentContactsPhoneNumbers', id: string, phone: string } | null>, address?: { __typename?: 'ComponentContactsAddress', address: string, googleMapLink: string } | null, socialNetworks: Array<{ __typename?: 'ComponentContactsSocialNetworks', id: string, link: string, icon: Enum_Componentcontactssocialnetworks_Icon } | null> } | null } | null } | null, global?: { __typename?: 'GlobalEntityResponse', data?: { __typename?: 'GlobalEntity', attributes?: { __typename?: 'Global', googleAnalyticsTag: string, lightLogo: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null }, darkLogo: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null } } | null } | null } | null, services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title: string } | null }> } | null };
+export type InitialDataQuery = { __typename?: 'Query', navbar?: { __typename?: 'NavbarEntityResponse', data?: { __typename?: 'NavbarEntity', attributes?: { __typename?: 'Navbar', navLinks: Array<{ __typename: 'ComponentMenuDropdown', id: string, label: string, Link: Array<{ __typename?: 'ComponentMenuLink', id: string, title: string, page?: { __typename?: 'PageEntityResponse', data?: { __typename?: 'PageEntity', attributes?: { __typename?: 'Page', slug: string } | null } | null } | null } | null> } | { __typename: 'ComponentMenuLink', id: string, title: string, page?: { __typename?: 'PageEntityResponse', data?: { __typename?: 'PageEntity', attributes?: { __typename?: 'Page', slug: string } | null } | null } | null } | { __typename: 'Error' } | null> } | null } | null } | null, contact?: { __typename?: 'ContactEntityResponse', data?: { __typename?: 'ContactEntity', attributes?: { __typename?: 'Contact', email: string, phoneNumbers: Array<{ __typename?: 'ComponentContactsPhoneNumbers', id: string, phone: string } | null>, address?: { __typename?: 'ComponentContactsAddress', address: string, googleMapLink: string } | null, socialNetworks: Array<{ __typename?: 'ComponentContactsSocialNetworks', id: string, link: string, icon: Enum_Componentcontactssocialnetworks_Icon } | null> } | null } | null } | null, global?: { __typename?: 'GlobalEntityResponse', data?: { __typename?: 'GlobalEntity', attributes?: { __typename?: 'Global', googleAnalyticsTag: string, siteUrl: string, siteName: string, lightLogo: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null }, darkLogo: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', alternativeText?: string | null, url: string } | null } | null }, favicon: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string } | null } | null } } | null } | null } | null, services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', title: string } | null }> } | null };
 
 export type PageQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -1616,7 +1710,14 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', pages?: { __typename?: 'PageEntityResponseCollection', data: Array<{ __typename?: 'PageEntity', attributes?: { __typename?: 'Page', blocks?: Array<{ __typename: 'ComponentBlocksAccordion', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null } | null, accordion: Array<{ __typename?: 'ComponentAccordionFaq', id: string, title: string, content: string } | null> } | { __typename: 'ComponentBlocksContacts' } | { __typename: 'ComponentBlocksDoubleSection', leftSection: string, rightSection: string, title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null } | null } | { __typename: 'ComponentBlocksHeading', headingTitle: string, headingDescription?: string | null, contactButton?: boolean | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | { __typename: 'ComponentBlocksHomeHero', heroTitle: string, heroDescription: string, dimensions?: { __typename?: 'ComponentDimensionsDimensions', height: string, length: string, width: string } | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | { __typename: 'ComponentBlocksImagesGallery', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null } | null, images: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null }> } } | { __typename: 'ComponentBlocksPrices', title?: { __typename?: 'ComponentTitleTitle', title: string, align?: Enum_Componenttitletitle_Align | null, description?: string | null } | null } | { __typename: 'ComponentBlocksSection', content: string, title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null } | null } | { __typename: 'ComponentBlocksServices', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null } | null } | { __typename: 'Error' } | null> | null } | null }> } | null };
+export type PageQuery = { __typename?: 'Query', pages?: { __typename?: 'PageEntityResponseCollection', data: Array<{ __typename?: 'PageEntity', attributes?: { __typename?: 'Page', blocks?: Array<{ __typename: 'ComponentBlocksAccordion', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null, decoration?: boolean | null } | null, accordion: Array<{ __typename?: 'ComponentAccordionFaq', id: string, title: string, content: string } | null> } | { __typename: 'ComponentBlocksContacts', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null, decoration?: boolean | null } | null } | { __typename: 'ComponentBlocksDoubleSection', leftSection: string, rightSection: string, title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null, decoration?: boolean | null } | null } | { __typename: 'ComponentBlocksHeading', headingTitle: string, headingDescription?: string | null, contactButton?: boolean | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | { __typename: 'ComponentBlocksHomeHero', heroTitle: string, heroDescription: string, dimensions?: { __typename?: 'ComponentDimensionsDimensions', height: string, length: string, width: string } | null, image: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | { __typename: 'ComponentBlocksImagesGallery', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null, decoration?: boolean | null } | null, images: { __typename?: 'UploadFileRelationResponseCollection', data: Array<{ __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null }> } } | { __typename: 'ComponentBlocksPrices', title?: { __typename?: 'ComponentTitleTitle', title: string, align?: Enum_Componenttitletitle_Align | null, description?: string | null, decoration?: boolean | null } | null } | { __typename: 'ComponentBlocksSection', content: string, title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null, decoration?: boolean | null } | null } | { __typename: 'ComponentBlocksServices', title?: { __typename?: 'ComponentTitleTitle', title: string, description?: string | null, align?: Enum_Componenttitletitle_Align | null, decoration?: boolean | null } | null } | { __typename: 'Error' } | null> | null, seo: { __typename?: 'ComponentSeoSeo', metaTitle: string, metaDescription: string, keywords: string, canonicalURL: string, metaImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } } | null }> } | null };
+
+export type PricesQueryVariables = Exact<{
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+}>;
+
+
+export type PricesQuery = { __typename?: 'Query', prices?: { __typename?: 'PriceEntityResponseCollection', data: Array<{ __typename?: 'PriceEntity', id?: string | null, attributes?: { __typename?: 'Price', priceTitle: string, subtitle?: string | null, description: string, service?: { __typename?: 'ServiceEntityResponse', data?: { __typename?: 'ServiceEntity', attributes?: { __typename?: 'Service', slug: string, title: string } | null } | null } | null } | null }> } | null };
 
 export type ServiceQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -1624,7 +1725,7 @@ export type ServiceQueryVariables = Exact<{
 }>;
 
 
-export type ServiceQuery = { __typename?: 'Query', services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', blocks?: Array<{ __typename: 'ComponentBlocksAccordion' } | { __typename: 'ComponentBlocksHeading', id: string, headingTitle: string, headingDescription?: string | null, contactButton?: boolean | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | { __typename: 'ComponentBlocksImagesGallery' } | { __typename: 'ComponentBlocksSection', content: string, title?: { __typename?: 'ComponentTitleTitle', title: string, align?: Enum_Componenttitletitle_Align | null } | null } | { __typename: 'ComponentBlocksServices' } | { __typename: 'Error' } | null> | null } | null }> } | null };
+export type ServiceQuery = { __typename?: 'Query', services?: { __typename?: 'ServiceEntityResponseCollection', data: Array<{ __typename?: 'ServiceEntity', id?: string | null, attributes?: { __typename?: 'Service', blocks?: Array<{ __typename: 'ComponentBlocksAccordion' } | { __typename: 'ComponentBlocksDoubleSection' } | { __typename: 'ComponentBlocksHeading', headingTitle: string, headingDescription?: string | null, contactButton?: boolean | null, background: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } } | { __typename: 'ComponentBlocksImagesGallery' } | { __typename: 'ComponentBlocksSection', content: string, title?: { __typename?: 'ComponentTitleTitle', title: string, align?: Enum_Componenttitletitle_Align | null, description?: string | null, decoration?: boolean | null } | null } | { __typename: 'ComponentBlocksServices' } | { __typename: 'Error' } | null> | null, seo: { __typename?: 'ComponentSeoSeo', metaTitle: string, metaDescription: string, keywords: string, canonicalURL: string, metaImage?: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, alternativeText?: string | null } | null } | null } | null } } | null }> } | null };
 
 export type ServicesQueryVariables = Exact<{
   locale?: InputMaybe<Scalars['I18NLocaleCode']>;
@@ -1683,7 +1784,6 @@ export const InitialDataDocument = gql`
           address
           googleMapLink
         }
-        workTime
         socialNetworks {
           id
           link
@@ -1712,10 +1812,19 @@ export const InitialDataDocument = gql`
           }
         }
         googleAnalyticsTag
+        favicon {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+        siteUrl
+        siteName
       }
     }
   }
-  services {
+  services(locale: $locale) {
     data {
       id
       attributes {
@@ -1795,6 +1904,7 @@ export const PageDocument = gql`
               title
               description
               align
+              decoration
             }
           }
           ... on ComponentBlocksSection {
@@ -1802,6 +1912,7 @@ export const PageDocument = gql`
               title
               description
               align
+              decoration
             }
             content
           }
@@ -1810,6 +1921,7 @@ export const PageDocument = gql`
               title
               description
               align
+              decoration
             }
             images {
               data {
@@ -1826,6 +1938,7 @@ export const PageDocument = gql`
               title
               description
               align
+              decoration
             }
             accordion {
               id
@@ -1838,6 +1951,7 @@ export const PageDocument = gql`
               title
               description
               align
+              decoration
             }
             leftSection
             rightSection
@@ -1847,8 +1961,31 @@ export const PageDocument = gql`
               title
               align
               description
+              decoration
             }
           }
+          ... on ComponentBlocksContacts {
+            title {
+              title
+              description
+              align
+              decoration
+            }
+          }
+        }
+        seo {
+          metaTitle
+          metaDescription
+          metaImage {
+            data {
+              attributes {
+                url
+                alternativeText
+              }
+            }
+          }
+          keywords
+          canonicalURL
         }
       }
     }
@@ -1884,6 +2021,56 @@ export function usePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageQ
 export type PageQueryHookResult = ReturnType<typeof usePageQuery>;
 export type PageLazyQueryHookResult = ReturnType<typeof usePageLazyQuery>;
 export type PageQueryResult = Apollo.QueryResult<PageQuery, PageQueryVariables>;
+export const PricesDocument = gql`
+    query Prices($locale: I18NLocaleCode) {
+  prices(locale: $locale) {
+    data {
+      id
+      attributes {
+        priceTitle
+        subtitle
+        description
+        service {
+          data {
+            attributes {
+              slug
+              title
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePricesQuery__
+ *
+ * To run a query within a React component, call `usePricesQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePricesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePricesQuery({
+ *   variables: {
+ *      locale: // value for 'locale'
+ *   },
+ * });
+ */
+export function usePricesQuery(baseOptions?: Apollo.QueryHookOptions<PricesQuery, PricesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PricesQuery, PricesQueryVariables>(PricesDocument, options);
+      }
+export function usePricesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PricesQuery, PricesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PricesQuery, PricesQueryVariables>(PricesDocument, options);
+        }
+export type PricesQueryHookResult = ReturnType<typeof usePricesQuery>;
+export type PricesLazyQueryHookResult = ReturnType<typeof usePricesLazyQuery>;
+export type PricesQueryResult = Apollo.QueryResult<PricesQuery, PricesQueryVariables>;
 export const ServiceDocument = gql`
     query Service($slug: String!, $locale: I18NLocaleCode) {
   services(filters: {slug: {eq: $slug}}, locale: $locale) {
@@ -1893,7 +2080,6 @@ export const ServiceDocument = gql`
         blocks {
           __typename
           ... on ComponentBlocksHeading {
-            id
             headingTitle
             headingDescription
             background {
@@ -1910,9 +2096,25 @@ export const ServiceDocument = gql`
             title {
               title
               align
+              description
+              decoration
             }
             content
           }
+        }
+        seo {
+          metaTitle
+          metaDescription
+          metaImage {
+            data {
+              attributes {
+                url
+                alternativeText
+              }
+            }
+          }
+          keywords
+          canonicalURL
         }
       }
     }
@@ -1950,7 +2152,7 @@ export type ServiceLazyQueryHookResult = ReturnType<typeof useServiceLazyQuery>;
 export type ServiceQueryResult = Apollo.QueryResult<ServiceQuery, ServiceQueryVariables>;
 export const ServicesDocument = gql`
     query Services($locale: I18NLocaleCode) {
-  services(locale: $locale) {
+  services(sort: "id:asc", locale: $locale) {
     data {
       id
       attributes {

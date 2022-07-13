@@ -1,26 +1,4 @@
 const en = {
-  navLinks: [
-    {
-      title: 'Home',
-      path: '/',
-    },
-    {
-      title: 'About Us',
-      path: '/about-us',
-    },
-    {
-      title: 'Services',
-      path: '/services',
-    },
-    {
-      title: 'Prices',
-      path: '/prices',
-    },
-    {
-      title: 'Contacts',
-      path: '/contacts',
-    },
-  ],
   homeHero: {
     dimensions: {
       title: 'Dimensions of the transporter',
@@ -30,9 +8,6 @@ const en = {
     },
   },
   section: {
-    weProvide: {
-      title: 'We Provide',
-    },
     contactUs: {
       title: 'Contact Us',
       subtitle: 'We are looking forward to your inquiry and will answer it as soon as possible.',
@@ -42,6 +17,8 @@ const en = {
     contactUs: 'Contact Us',
     seePrices: 'See prices',
     sendForm: 'Submit form',
+    submitARequest: 'Submit a request',
+    aboutService: 'About service',
   },
   link: {
     readMore: 'Read more',
@@ -95,6 +72,9 @@ const en = {
     title: 'Ooops! Page not found',
     subtitle: "This page doesn't exist or was removed!",
     btn: 'Back to Home',
+  },
+  error: {
+    fetchError: 'An error has occurred while processing your request',
   },
 }
 

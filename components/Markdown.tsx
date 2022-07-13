@@ -1,4 +1,5 @@
 import { Box, chakra, Heading, Text } from '@chakra-ui/react'
+import Image from 'next/image'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
@@ -18,36 +19,27 @@ const Markdown = ({ content }: any) => {
         },
       }}
       components={{
-        // img: ({ node, ...props }) => {
-        //   if (props.src) {
-        //     return (
-        //       <Zoom
-        //         overlayBgColorEnd={'rgba(0,0,0, 0.8)'}
-        //         zoomMargin={100}
-        //         wrapStyle={{
-        //           width: '100%',
-        //           marginBottom: 0,
-        //         }}
-        //       >
-        //         <Box sx={{ width: '100%' }} mb={0}>
-        //           <Image
-        //             priority
-        //             layout='responsive'
-        //             objectFit='cover'
-        //             width={1600}
-        //             height={1000}
-        //             // placeholder='blur'
-        //             // blurDataURL={props.src}
-        //             src={props.src}
-        //             alt={props.alt}
-        //           />
-        //         </Box>
-        //       </Zoom>
-        //     )
-        //   } else {
-        //     return null
-        //   }
-        // },
+        img: ({ node, ...props }) => {
+          if (props.src) {
+            return (
+              <Box sx={{ width: '100%' }} mb={0}>
+                <Image
+                  priority
+                  layout='responsive'
+                  objectFit='contain'
+                  width={1600}
+                  height={1000}
+                  placeholder='blur'
+                  blurDataURL={props.src}
+                  src={props.src}
+                  alt={props.alt}
+                />
+              </Box>
+            )
+          } else {
+            return null
+          }
+        },
         p: ({ node, ...props }) => <Text lineHeight={1.8}>{props.children}</Text>,
         a: ({ node, ...props }) => (
           <StyledLink {...props} target='_blank' rel='noreferrer'>

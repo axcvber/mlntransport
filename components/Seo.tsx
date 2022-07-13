@@ -24,10 +24,10 @@ const Seo: React.FC<ISeo> = ({ seo }) => {
         url: seo.canonicalURL,
         images: [
           {
-            url: seo.metaImage.data?.attributes?.url || '',
+            url: seo.metaImage?.data?.attributes?.url || '',
             width: 400,
             height: 400,
-            alt: seo.metaImage.data?.attributes?.alternativeText || '',
+            alt: seo.metaImage?.data?.attributes?.alternativeText || '',
           },
         ],
       }}

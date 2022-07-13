@@ -18,19 +18,22 @@ const Logo: React.FC<ILogo> = ({ isSticky }) => {
     <Link href='/' passHref>
       <Box
         as='a'
-        display={'inline-flex'}
+        // display={'block'}
         sx={{
+          position: 'relative',
           transition: 'all 0.2s ease',
-          width: isSticky || isMobile ? '100px' : '130px',
-          height: '100%',
+          width: isSticky || isMobile ? '130px' : '150px',
+          height: isSticky || isMobile ? '60px' : '80px',
         }}
       >
         <Image
+          sizes='50vw'
           priority
+          layout='fill'
           objectFit='contain'
           objectPosition={'left'}
-          width={250}
-          height={120}
+          // width={150}
+          // height={80}
           src={logoUrl || ''}
           alt='logo'
         />

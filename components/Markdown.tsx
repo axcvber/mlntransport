@@ -61,13 +61,12 @@ const Markdown = ({ content }: any) => {
                   placeholder='blur'
                   blurDataURL={image.properties.src}
                   src={image.properties.src}
-                  width={1500}
+                  width={1600}
                   height={800}
-                  objectFit='contain'
-                  layout='responsive'
+                  objectFit='cover'
+                  layout='intrinsic'
                   alt={alt}
                   priority
-                  sizes={'100vw'}
                   // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
                 />
               </Box>

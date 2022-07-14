@@ -1,11 +1,12 @@
-import { Box, chakra, Heading, Text } from '@chakra-ui/react'
+import { Box, chakra, Heading, Text, useDimensions } from '@chakra-ui/react'
 import Image from 'next/image'
-import React from 'react'
+import React, { useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 const Markdown = ({ content }: any) => {
   const RMarkdown = chakra(ReactMarkdown)
-
+  const elementRef = useRef<any>()
+  const dimension = useDimensions(elementRef, true)
   return (
     <RMarkdown
       sx={{
@@ -19,7 +20,62 @@ const Markdown = ({ content }: any) => {
         },
       }}
       components={{
-        p: ({ node, ...props }) => <Text lineHeight={1.8}>{props.children}</Text>,
+        // img: ({ node, ...props }) => {
+        //   if (props.src) {
+        //     return (
+        //       <Box ref={elementRef} sx={{ width: '100%' }} mb={0}>
+        //         <Image
+        //           sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
+        //           priority
+        //           layout='responsive'
+        //           objectFit='contain'
+        //           width={1600}
+        //           height={1000}
+        //           // placeholder='blur'
+        //           // blurDataURL={props.src}
+        //           src={props.src}
+        //           alt={props.alt}
+        //         />
+        //       </Box>
+        //     )
+        //   } else {
+        //     return null
+        //   }
+        // },
+        p: ({ node, children }) => {
+          if (node.children[0].tagName === 'img') {
+            const image: any = node.children[0]
+            console.log('image', image)
+
+            const metastring = image.properties.alt
+            const alt = metastring?.replace(/ *\{[^)]*\} */g, '')
+            const metaWidth = metastring.match(/{([^}]+)x/)
+            const metaHeight = metastring.match(/x([^}]+)}/)
+            const width = metaWidth ? metaWidth[1] : '768'
+            const height = metaHeight ? metaHeight[1] : '432'
+
+            return (
+              <Box sx={{ width: '100%' }} mb={0}>
+                <Image
+                  placeholder='blur'
+                  blurDataURL={image.properties.src}
+                  src={image.properties.src}
+                  width={1500}
+                  height={800}
+                  objectFit='contain'
+                  layout='responsive'
+                  alt={alt}
+                  priority
+                  sizes={'100vw'}
+                  // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
+                />
+              </Box>
+            )
+          }
+          // Return default child if it's not an image
+          return <p>{children}</p>
+        },
+        // p: ({ node, ...props }) => <Text lineHeight={1.8}>{props.children}</Text>,
         a: ({ node, ...props }) => (
           <StyledLink {...props} target='_blank' rel='noreferrer'>
             {props.children}

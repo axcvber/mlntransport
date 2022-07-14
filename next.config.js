@@ -12,6 +12,7 @@ const nextConfig = {
     deviceSizes: [320, 420, 768, 1024, 1200],
     loader: 'default',
     domains: ['res.cloudinary.com'],
+    formats: ['image/avif', 'image/webp'],
   },
   env: {
     SERVER_URL: process.env.SERVER_URL,

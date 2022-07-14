@@ -64,9 +64,9 @@ const Markdown = ({ content }: any) => {
                   width={1600}
                   height={800}
                   objectFit='cover'
-                  layout='intrinsic'
+                  layout='responsive'
                   alt={alt}
-                  priority
+
                   // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
                 />
               </Box>

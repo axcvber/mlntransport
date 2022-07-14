@@ -43,6 +43,7 @@ const Markdown = ({ content }: any) => {
         //   }
         // },
         p: ({ node, children }) => {
+          //@ts-ignore
           if (node.children[0].tagName === 'img') {
             const image: any = node.children[0]
             console.log('image', image)

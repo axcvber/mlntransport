@@ -13,6 +13,7 @@ const nextConfig = {
     loader: 'default',
     domains: ['res.cloudinary.com'],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
   },
   env: {
     SERVER_URL: process.env.SERVER_URL,

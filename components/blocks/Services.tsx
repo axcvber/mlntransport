@@ -81,11 +81,11 @@ const Services = ({ title }: any) => {
                       sx={{ zIndex: 2, position: 'relative', p: 5 }}
                       alignItems={{ base: 'center', sm: 'flex-start' }}
                     >
-                      <Box>
+                      <Box position={'relative'} w={'70px'} h={'70px'}>
                         <Image
+                          priority
+                          layout='fill'
                           src={item.attributes?.icon.data?.attributes?.url || ''}
-                          width={70}
-                          height={70}
                           alt={item.attributes?.icon.data?.attributes?.alternativeText || ''}
                         />
                       </Box>

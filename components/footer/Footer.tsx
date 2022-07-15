@@ -14,7 +14,6 @@ const Footer = () => {
     <Box
       mt='auto'
       as='footer'
-      id='form'
       sx={{
         position: 'relative',
         overflow: 'hidden',
@@ -67,7 +66,7 @@ const Footer = () => {
           opacity: 0.6,
         }}
       >
-        <Container maxW={{ base: 'full', md: 'container.lg' }} px={{ base: 0, md: 'inherit' }}>
+        <Container id='form' maxW={{ base: 'full', md: 'container.lg' }} px={{ base: 0, md: 'inherit' }}>
           <ContactForm />
         </Container>
         <Box

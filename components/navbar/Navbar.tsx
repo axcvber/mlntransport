@@ -61,6 +61,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
           <Stack direction={'row'}>
             <RSLink to='form'>
               <Button
+                ml={{ base: 2, sm: 0 }}
                 leftIcon={<RiContactsBook2Fill fontSize={22} />}
                 bg={stickyNav ? '#fff' : 'brand.500'}
                 colorScheme={stickyNav ? 'gray' : 'brand'}

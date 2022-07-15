@@ -1,18 +1,6 @@
-import {
-  Box,
-  chakra,
-  Grid,
-  GridItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalOverlay,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Grid, GridItem } from '@chakra-ui/react'
 import Image from 'next/image'
 import React, { useCallback, useState } from 'react'
-import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 import BlockTitle from '../BlockTitle'
@@ -81,17 +69,6 @@ const ImagesGallery = ({ title, images }: any) => {
                 // background: 'red',
               }}
             >
-              {/* <ControlledZoom
-              overlayBgColorEnd={'rgba(0,0,0, 0.8)'}
-              isZoomed={isZoomed}
-              onZoomChange={handleZoomChange}
-              wrapStyle={{
-                position: 'relative',
-                width: '100%',
-                height: '100%',
-                background: 'red',
-              }}
-            > */}
               <Image
                 priority
                 layout='fill'
@@ -102,27 +79,9 @@ const ImagesGallery = ({ title, images }: any) => {
                 alt={item.attributes.alternativeText}
               />
             </Zoom>
-            {/* </ControlledZoom> */}
           </GridItem>
         ))}
       </Grid>
-
-      {/* <Modal size='4xl' isCentered blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent width={'100%'} h='100%' position={'relative'}>
-          <ModalCloseButton />
-          <ModalBody>
-            <Image
-              layout='fill'
-              objectFit='contain'
-              blurDataURL={zoomedImg?.attributes.url || ''}
-              placeholder='blur'
-              src={zoomedImg?.attributes.url || ''}
-              alt={zoomedImg?.attributes.alternativeText || ''}
-            />
-          </ModalBody>
-        </ModalContent>
-      </Modal> */}
     </>
   )
 }

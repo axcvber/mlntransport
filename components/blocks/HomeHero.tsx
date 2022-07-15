@@ -1,6 +1,6 @@
-import { Box, Button, Divider, Heading, Stack, Text, useDimensions } from '@chakra-ui/react'
+import { Box, Button, Divider, Heading, Stack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
-import React, { useRef } from 'react'
+import React from 'react'
 import { FiArrowRight, FiLayers } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 import useLocale from '../../hooks/useLocale'
@@ -9,8 +9,7 @@ import RSLink from '../RSLink.tsx'
 
 const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image }) => {
   const t = useLocale()
-  // const elementRef = useRef<any>()
-  // const dimension = useDimensions(elementRef, true)
+
   return (
     <Box my={[0, 0, 0, 20]}>
       <Stack direction={{ base: 'column-reverse', lg: 'row' }} alignItems='center' spacing={5}>

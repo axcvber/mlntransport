@@ -2,15 +2,6 @@ import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import React from 'react'
 import { Maybe, PageBlocksDynamicZone } from '../generated'
-// import Accordion from './blocks/Accordion'
-// import Contacts from './blocks/Contacts'
-// import DoubleSection from './blocks/DoubleSection'
-// import Prices from './blocks/Prices'
-// import Heading from './blocks/Heading'
-// import HomeHero from './blocks/HomeHero'
-// import ImagesGallery from './blocks/ImagesGallery'
-// import Section from './blocks/Section'
-// import Services from './blocks/Services'
 
 const HomeHero = dynamic(() => import('./blocks/HomeHero'))
 const Section = dynamic(() => import('./blocks/Section'))

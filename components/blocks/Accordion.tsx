@@ -3,9 +3,7 @@ import {
   AccordionIcon,
   AccordionItem,
   AccordionPanel,
-  Box,
   Accordion as ChakraAccordion,
-  Heading,
   Text,
 } from '@chakra-ui/react'
 import React from 'react'

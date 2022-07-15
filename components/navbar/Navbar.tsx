@@ -1,4 +1,4 @@
-import { Box, Button, Container, Hide, IconButton, Show, Stack, useBreakpointValue } from '@chakra-ui/react'
+import { Box, Button, Container, IconButton, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import Logo from '../Logo'
 import { FiMenu } from 'react-icons/fi'

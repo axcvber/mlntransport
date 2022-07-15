@@ -1,13 +1,15 @@
 import { Box, Button, Container, IconButton, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Logo from '../Logo'
 import { FiMenu } from 'react-icons/fi'
 import useLocale from '../../hooks/useLocale'
-import MobileMenu from './MobileMenu'
+// import MobileMenu from './MobileMenu'
 import NavMenu from './NavMenu'
 import Progress from '../Progress'
 import RSLink from '../RSLink.tsx'
 import { RiContactsBook2Fill } from 'react-icons/ri'
+const MobileMenu = dynamic(() => import('./MobileMenu'))
 
 interface INavbar {
   isRouteChanging: boolean

@@ -45,7 +45,7 @@ const LocaleMenu: React.FC<{ withBorder?: boolean }> = ({ withBorder }) => {
 
   return (
     <>
-      <Menu autoSelect={false} placement='top-end' isLazy>
+      <Menu autoSelect={false} placement='top-end'>
         {currentLocale && (
           <MenuButton
             transitionProperty={'background'}

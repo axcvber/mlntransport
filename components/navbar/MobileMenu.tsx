@@ -19,7 +19,9 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { FiX } from 'react-icons/fi'
 import useAppContext from '../../hooks/useAppContext'
-import LocaleMenu from './LocaleMenu'
+import dynamic from 'next/dynamic'
+
+const LocaleMenu = dynamic(() => import('./LocaleMenu'))
 
 interface IMobileMenu {
   isOpen: boolean

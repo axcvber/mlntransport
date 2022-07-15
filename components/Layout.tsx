@@ -1,9 +1,11 @@
 import { Box, Container } from '@chakra-ui/react'
 import React, { ReactChild } from 'react'
-import ContactsWidget from './ContactsWidget'
-import Footer from './footer/Footer'
+import dynamic from 'next/dynamic'
+// import ContactsWidget from './ContactsWidget'
 import Navbar from './navbar/Navbar'
-import ScrollTop from './ScrollTop'
+const ScrollTop = dynamic(() => import('./ScrollTop'))
+const Footer = dynamic(() => import('./footer/Footer'))
+const ContactsWidget = dynamic(() => import('./ContactsWidget'))
 
 interface ILayout {
   children: ReactChild

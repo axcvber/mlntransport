@@ -17,7 +17,6 @@
     "@fontsource/open-sans": "^4.5.10",
     "@fontsource/ubuntu": "^4.5.10",
     "@hookform/resolvers": "^2.9.3",
-    "@next/bundle-analyzer": "^12.2.2",
     "@tanem/react-nprogress": "^5.0.7",
     "axios": "^0.27.2",
     "framer-motion": "^6",

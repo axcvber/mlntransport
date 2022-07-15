@@ -32,7 +32,7 @@ const MobileMenu: React.FC<IMobileMenu> = ({ isOpen, onClose }) => {
   const navLinks = initialData?.navbar?.data?.attributes?.navLinks
 
   return (
-    <Drawer isOpen={isOpen} placement='right' onClose={onClose}>
+    <Drawer isOpen={isOpen} placement='right' isFullHeight onClose={onClose}>
       <DrawerOverlay />
       <DrawerContent bg='brand.500' color='#fff'>
         <HStack justifyContent={'space-between'} px={6} py={4}>

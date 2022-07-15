@@ -68,6 +68,7 @@ const de = {
       successFormSend: 'Ihre Nachricht wurde erfolgreich gesendet',
       errorFormSend: 'Etwas ist schief gelaufen',
     },
+    submitting: 'Einreichung',
   },
   page404: {
     title: 'Ooops! Seite nicht gefunden',

@@ -16,7 +16,7 @@ const NotFoundPage = () => {
     <Box
       sx={{
         width: '100%',
-        minHeight: '100vh',
+        minHeight: 'calc(100vh - 100px)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -24,11 +24,13 @@ const NotFoundPage = () => {
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', p: 2 }}>
-        <Image objectFit='contain' width={600} height={300} src={image} alt='404' />
+        <Image priority layout='responsive' objectFit='contain' width={800} height={500} src={image} alt='404' />
         <Box sx={{ textAlign: 'center' }}>
-          <Heading>{t.page404.title}</Heading>
-          <Text my={5}>{t.page404.subtitle}</Text>
-          <Button variant='outline' colorScheme={'brand'} onClick={handleToHome}>
+          <Heading size='2xl'>{t.page404.title}</Heading>
+          <Text my={5} fontSize='lg'>
+            {t.page404.subtitle}
+          </Text>
+          <Button colorScheme={'brand'} onClick={handleToHome}>
             {t.page404.btn}
           </Button>
         </Box>

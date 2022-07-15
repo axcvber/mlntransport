@@ -30,12 +30,24 @@ const Prices = ({ title }: any) => {
               .fill(0)
               .map((_, inx: number) => (
                 <GridItem key={inx}>
-                  <Skeleton startColor='gray.100' endColor='gray.200' h={'400px'} borderRadius={10} boxShadow='xl' />
+                  <Skeleton
+                    startColor='gray.100'
+                    endColor='gray.200'
+                    h={'400px'}
+                    borderRadius={10}
+                    boxShadow='0 0 78px -13px #b7b7b7'
+                  />
                 </GridItem>
               ))
           : data.prices?.data.map((item) => (
-              <GridItem key={item.id} bg='#fff' boxShadow={'xl'} borderRadius={10} overflow='hidden'>
-                <VStack bg='rgba(241,124,87, 0.2)' py={10} px={5} spacing={3}>
+              <GridItem
+                key={item.id}
+                bg='#fff'
+                boxShadow={'0px 0px 13px 4px rgba(0,0,0,0.12)'}
+                borderRadius={10}
+                overflow='hidden'
+              >
+                <VStack py={10} px={5} spacing={3}>
                   <Text textAlign='center' fontSize={'xl'}>
                     {item.attributes?.service?.data?.attributes?.title}
                   </Text>
@@ -44,13 +56,15 @@ const Prices = ({ title }: any) => {
                   </Text>
                   <Text textAlign='center'>{item.attributes?.subtitle}</Text>
                   <Link href={`services/${item.attributes?.service?.data?.attributes?.slug}`} passHref>
-                    <Button colorScheme={'brand'} as='a'>
+                    <Button colorScheme={'brand'} as='a' variant={'outline'}>
                       {t.button.aboutService}
                     </Button>
                   </Link>
                 </VStack>
-                <VStack p={5}>
-                  <Text textAlign='center'>{item.attributes?.description}</Text>
+                <VStack p={5} bg='brand.400'>
+                  <Text textAlign='center' color={'#fff'}>
+                    {item.attributes?.description}
+                  </Text>
                 </VStack>
               </GridItem>
             ))}

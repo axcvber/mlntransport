@@ -67,6 +67,7 @@ const en = {
       successFormSend: 'Your message has been sent successfully',
       errorFormSend: 'Something went wrong',
     },
+    submitting: 'Submitting',
   },
   page404: {
     title: 'Ooops! Page not found',

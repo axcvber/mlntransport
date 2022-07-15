@@ -96,8 +96,8 @@ const ImagesGallery = ({ title, images }: any) => {
                 priority
                 layout='fill'
                 objectFit={isZoomed && item.id === zoomedId ? 'contain' : 'cover'}
-                // blurDataURL={item.attributes.url}
-                // placeholder='blur'
+                blurDataURL={item.attributes.url}
+                placeholder='blur'
                 src={item.attributes.url}
                 alt={item.attributes.alternativeText}
               />

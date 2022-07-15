@@ -7,6 +7,7 @@ import MobileMenu from './MobileMenu'
 import NavMenu from './NavMenu'
 import Progress from '../Progress'
 import RSLink from '../RSLink.tsx'
+import { RiContactsBook2Fill } from 'react-icons/ri'
 
 interface INavbar {
   isRouteChanging: boolean
@@ -60,6 +61,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
           <Stack direction={'row'}>
             <RSLink to='form'>
               <Button
+                leftIcon={<RiContactsBook2Fill fontSize={22} />}
                 bg={stickyNav ? '#fff' : 'brand.500'}
                 colorScheme={stickyNav ? 'gray' : 'brand'}
                 color={stickyNav ? 'gray.800' : '#fff'}

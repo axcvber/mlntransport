@@ -1,21 +1,9 @@
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Portal,
-  useDisclosure,
-} from '@chakra-ui/react'
+import { Box, Button, List, ListItem, Menu, MenuButton, MenuItem, MenuList, useDisclosure } from '@chakra-ui/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { FiChevronDown } from 'react-icons/fi'
 import useAppContext from '../../hooks/useAppContext'
-import useLocale from '../../hooks/useLocale'
 import LocaleMenu from './LocaleMenu'
 
 const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
@@ -30,31 +18,25 @@ const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
     userSelect: 'none',
     fontWeight: 500,
     fontSize: 'lg',
-    '&::before, &::after': {
+    '&::after': {
       content: '""',
       display: 'block',
       position: 'absolute',
       width: '100%',
       height: '2px',
-      // borderRadius: '50%',
-      background: stickyNav ? '#fff' : 'brand.500',
-      margin: 'auto',
-      top: '110%',
+      bottom: '-5px',
       left: 0,
+      background: stickyNav ? '#fff' : 'brand.500',
       pointerEvents: 'none',
-      opacity: 0,
-      transformOrigin: '50% 0%',
-      transform: 'translate3d(0, 3px, 0)',
-      transitionProperty: 'transform, opacity',
-      transitionDuration: '0.3s',
-      transitionTimingFunction: 'cubic-bezier(0.2, 1, 0.8, 1)',
+      transform: 'scaleX(0)',
+      transformOrigin: 'bottom right',
+      transition: 'transform 0.3s',
     },
     '&:hover, &.active': {
       color: stickyNav ? '#fff' : 'brand.500',
-      '&::before, &::after': {
-        opacity: 1,
-        transform: 'translate3d(0, 0, 0)',
-        transitionTimingFunction: 'cubic-bezier(0.2, 0, 0.3, 1)',
+      '&::after': {
+        transformOrigin: 'bottom left',
+        transform: 'scaleX(1)',
       },
     },
   }
@@ -101,7 +83,6 @@ const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
                     bg: 'transparent',
                   }}
                   rightIcon={<FiChevronDown />}
-                  // outline={0}
                   _focus={{
                     boxShadow: 'none',
                   }}

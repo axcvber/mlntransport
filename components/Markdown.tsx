@@ -182,8 +182,11 @@ const StyledOl = chakra('ol', {
     'li': {
       counterIncrement: 'item',
       fontWeight: 500,
-      my: 1.5,
+      my: 4,
       color: 'gray.700',
+      position: 'relative',
+      paddingLeft: '55px',
+
       '&:last-child': {
         marginBottom: 0,
       },
@@ -202,6 +205,10 @@ const StyledOl = chakra('ol', {
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        left: 0,
       },
     },
   },

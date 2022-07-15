@@ -2,15 +2,15 @@ import { Box, Button, Divider, Heading, Stack, Text, useDimensions } from '@chak
 import Image from 'next/image'
 import React, { useRef } from 'react'
 import { FiArrowRight, FiLayers } from 'react-icons/fi'
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import useLocale from '../../hooks/useLocale'
 import Link from 'next/link'
 import RSLink from '../RSLink.tsx'
 
 const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image }) => {
   const t = useLocale()
-  const elementRef = useRef<any>()
-  const dimension = useDimensions(elementRef, true)
+  // const elementRef = useRef<any>()
+  // const dimension = useDimensions(elementRef, true)
   return (
     <Box my={[0, 0, 0, 20]}>
       <Stack direction={{ base: 'column-reverse', lg: 'row' }} alignItems='center' spacing={5}>
@@ -26,9 +26,9 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
               visible: {
                 scale: 1,
                 opacity: 1,
-                // transition: {
-                //   delay: 0.2,
-                // },
+                transition: {
+                  delay: 0.2,
+                },
               },
             }}
           >
@@ -104,13 +104,10 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
         </Box>
 
         <Box
-          ref={elementRef}
-          // display='flex'
+          // ref={elementRef}
           w={{ base: '100%', lg: '900px' }}
-          // w='100%'
           sx={{
             position: 'relative',
-
             '&:before, &:after': {
               zIndex: -1,
               position: 'absolute',
@@ -136,9 +133,6 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
           <motion.div
             initial='hidden'
             animate='visible'
-            style={{
-              position: 'relative',
-            }}
             variants={{
               hidden: {
                 scale: 0.8,
@@ -150,14 +144,14 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
                 opacity: 1,
                 x: 0,
 
-                // transition: {
-                //   delay: 0.2,
-                // },
+                transition: {
+                  delay: 0.2,
+                },
               },
             }}
           >
             <Image
-              sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
+              // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
               layout='responsive'
               objectFit='contain'
               width={900}

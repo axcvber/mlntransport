@@ -2,14 +2,14 @@ import { Box, Grid, GridItem, Skeleton, Stack, Text } from '@chakra-ui/react'
 import Image from 'next/image'
 import React from 'react'
 import { FiArrowUpRight } from 'react-icons/fi'
-import { useServicesQuery } from '../../generated'
+import { ComponentBlocksServices, useServicesQuery } from '../../generated'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import BlockTitle from '../BlockTitle'
 import useLocale from '../../hooks/useLocale'
 import ErrorAlert from '../ErrorAlert'
 
-const Services = ({ title }: any) => {
+const Services: React.FC<ComponentBlocksServices> = ({ title }) => {
   const router = useRouter()
   const t = useLocale()
   const { data, error } = useServicesQuery({
@@ -19,7 +19,6 @@ const Services = ({ title }: any) => {
     notifyOnNetworkStatusChange: true,
   })
   if (error) return <ErrorAlert />
-  console.log('data services', data)
 
   return (
     <Box>

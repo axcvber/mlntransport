@@ -1,9 +1,10 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import React from 'react'
+import { ComponentBlocksDoubleSection } from '../../generated'
 import BlockTitle from '../BlockTitle'
 import Markdown from '../Markdown'
 
-const DoubleSection = ({ title, leftSection, rightSection }: any) => {
+const DoubleSection: React.FC<ComponentBlocksDoubleSection> = ({ title, leftSection, rightSection }) => {
   return (
     <>
       {title && <BlockTitle title={title} />}
@@ -11,7 +12,6 @@ const DoubleSection = ({ title, leftSection, rightSection }: any) => {
         <GridItem>
           <Markdown content={leftSection} />
         </GridItem>
-
         <GridItem>
           <Markdown content={rightSection} />
         </GridItem>

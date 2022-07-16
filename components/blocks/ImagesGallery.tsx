@@ -1,48 +1,27 @@
 import { Grid, GridItem } from '@chakra-ui/react'
 import Image from 'next/image'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import { ComponentBlocksImagesGallery, Maybe } from '../../generated'
 import BlockTitle from '../BlockTitle'
+import 'react-medium-image-zoom/dist/styles.css'
 
-const ImagesGallery = ({ title, images }: any) => {
-  console.log('images', images)
-  const [isZoomed, setIsZoomed] = useState(false)
-  const [zoomedId, setZoomedId] = useState()
+const ImagesGallery: React.FC<ComponentBlocksImagesGallery> = ({ title, images }) => {
+  const [isZoomed, setIsZoomed] = useState<boolean>(false)
+  const [zoomedId, setZoomedId] = useState<string>()
 
-  const handleImgLoad = useCallback(() => {
-    setIsZoomed(true)
-  }, [])
-
-  const handleZoomChange = useCallback((shouldZoom: any, id: any) => {
-    setZoomedId(id)
-    setIsZoomed(shouldZoom)
-  }, [])
-  // const onFullImage = (item: any) => {
-  //   setZoomedImg(item)
-  //   onOpen()
-  // }
+  const handleZoomChange = (shouldZoom: boolean, id?: Maybe<string>) => {
+    if (id) {
+      setZoomedId(id)
+      setIsZoomed(shouldZoom)
+    }
+  }
 
   return (
     <>
       {title && <BlockTitle title={title} />}
-      <Grid
-        // templateRows='repeat(2, 1fr)'
-        // bg={'brand.500'}
-        // p={3}
-        templateColumns='repeat(4, 1fr)'
-        gridAutoRows={'200px'}
-        gap={3}
-        // borderRadius='5px'
-        // sx={{
-        //   width: '100%',
-        //   display: 'grid',
-        //   gridTemplateColumns: 'repeat(4, 1fr)',
-        //   gridAutoRows: '200px',
-        //   gridGap: '10px',
-        // }}
-      >
-        {images.data.map((item: any) => (
+      <Grid templateColumns='repeat(4, 1fr)' gridAutoRows={'200px'} gap={3}>
+        {images.data.map((item) => (
           <GridItem
             onClick={() => handleZoomChange(!isZoomed, item.id)}
             key={item.id}
@@ -66,17 +45,16 @@ const ImagesGallery = ({ title, images }: any) => {
                 position: 'relative',
                 width: '100%',
                 height: '100%',
-                // background: 'red',
               }}
             >
               <Image
                 priority
                 layout='fill'
                 objectFit={isZoomed && item.id === zoomedId ? 'contain' : 'cover'}
-                blurDataURL={item.attributes.url}
+                blurDataURL={item.attributes?.url || ''}
                 placeholder='blur'
-                src={item.attributes.url}
-                alt={item.attributes.alternativeText}
+                src={item.attributes?.url || ''}
+                alt={item.attributes?.alternativeText || ''}
               />
             </Zoom>
           </GridItem>

@@ -2,13 +2,14 @@ import { Box, chakra, Grid, GridItem, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import { FaGlobe, FaPhoneAlt } from 'react-icons/fa'
 import { IoLocationSharp, IoMail } from 'react-icons/io5'
+import { ComponentBlocksContacts } from '../../generated'
 import useAppContext from '../../hooks/useAppContext'
 import getSocialIcon from '../../utils/getSocialIcon'
 import BlockTitle from '../BlockTitle'
 
-const Contacts = ({ title }: any) => {
+const Contacts: React.FC<ComponentBlocksContacts> = ({ title }) => {
   const { initialData } = useAppContext()
-  const contacts = initialData?.contact?.data?.attributes as any
+  const contacts = initialData?.contact?.data?.attributes
   const icons = initialData?.contact?.data?.attributes?.socialNetworks
 
   return (
@@ -25,15 +26,16 @@ const Contacts = ({ title }: any) => {
       >
         <Card>
           <FaPhoneAlt />
-          {contacts.phoneNumbers.map((item: any) => (
-            <React.Fragment key={item.id}>
-              <Text>{item.phone}</Text>
-            </React.Fragment>
-          ))}
+          {contacts &&
+            contacts.phoneNumbers.map((item) => (
+              <React.Fragment key={item?.id}>
+                <Text>{item?.phone}</Text>
+              </React.Fragment>
+            ))}
         </Card>
         <Card>
           <IoMail />
-          <Text>{contacts.email}</Text>
+          <Text>{contacts?.email}</Text>
         </Card>
         {contacts?.address && (
           <Card>

@@ -2,12 +2,12 @@ import { Button, Grid, GridItem, Skeleton, Text, VStack } from '@chakra-ui/react
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { usePricesQuery } from '../../generated'
+import { ComponentBlocksPrices, usePricesQuery } from '../../generated'
 import useLocale from '../../hooks/useLocale'
 import BlockTitle from '../BlockTitle'
 import ErrorAlert from '../ErrorAlert'
 
-const Prices = ({ title }: any) => {
+const Prices: React.FC<ComponentBlocksPrices> = ({ title }) => {
   const { locale } = useRouter()
   const t = useLocale()
   const { data, error } = usePricesQuery({

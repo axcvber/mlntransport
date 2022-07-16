@@ -22,7 +22,6 @@ import Script from 'next/script'
 function MyApp({ Component, pageProps }: AppProps) {
   const { initialData } = pageProps
   const router = useRouter()
-  console.log('render')
 
   const [state, setState] = useState({
     isRouteChanging: false,
@@ -106,7 +105,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         }}
         twitter={{
           handle: '@handle',
-          site: '@site', //?
+          site: '@site',
           cardType: 'summary_large_image',
         }}
       />

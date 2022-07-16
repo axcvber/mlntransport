@@ -23,18 +23,6 @@ const theme = extendTheme({
       800: '#a9573d',
       900: '#914a34',
     },
-    // brand: {
-    //   50: '#f49d81',
-    //   100: '#f28c6c',
-    //   200: '#f17c57',
-    //   300: '#ef6b42',
-    //   400: '#ed5b2d',
-    //   500: '#ed5b2d',
-    //   600: '#d55229',
-    //   700: '#be4924',
-    //   800: '#a6401f',
-    //   900: '#8e371b',
-    // },
     gray: {
       50: '#ececec',
       100: '#EAEAEA',
@@ -49,13 +37,6 @@ const theme = extendTheme({
     },
   },
   components: {},
-  // breakpoints: {
-  //   sm: '320px',
-  //   md: '768px',
-  //   lg: '960px',
-  //   xl: '1200px',
-  //   '2xl': '1536px',
-  // },
   styles: {
     global: (props: StyleFunctionProps) => ({
       '::-webkit-scrollbar': {

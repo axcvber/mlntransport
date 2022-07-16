@@ -14,7 +14,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   env: {
-    SERVER_URL: process.env.SERVER_URL,
+    SERVER_API: process.env.SERVER_API,
   },
 }
 module.exports = nextConfig

@@ -60,7 +60,6 @@ const LocaleMenu: React.FC<{ withBorder?: boolean }> = ({ withBorder }) => {
               bg: withBorder ? 'brand.300' : 'gray.100',
             }}
             _active={{
-              // bg: 'transparent',
               bg: withBorder ? 'brand.600' : 'gray.200',
             }}
           >
@@ -83,7 +82,6 @@ const LocaleMenu: React.FC<{ withBorder?: boolean }> = ({ withBorder }) => {
           minW='auto'
           w='auto'
           bg='brand.50'
-          // color='#fff'
           padding={0}
           border='none'
           color={'gray.700'}
@@ -94,7 +92,6 @@ const LocaleMenu: React.FC<{ withBorder?: boolean }> = ({ withBorder }) => {
           {localeArr.map((item) => (
             <MenuItem
               key={item.label}
-              // bg={router.locale === item.locale ? 'gray.300' : 'inherit'}
               sx={{
                 bg: router.locale === item.locale ? 'brand.600' : 'inherit',
                 color: router.locale === item.locale ? '#fff' : 'inherit',

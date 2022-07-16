@@ -6,8 +6,9 @@ import { motion } from 'framer-motion'
 import useLocale from '../../hooks/useLocale'
 import Link from 'next/link'
 import RSLink from '../RSLink.tsx'
+import { ComponentBlocksHomeHero } from '../../generated'
 
-const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image }) => {
+const HomeHero: React.FC<ComponentBlocksHomeHero> = ({ heroTitle, heroDescription, dimensions, image }) => {
   const t = useLocale()
 
   return (
@@ -36,7 +37,6 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
                 wordBreak={'break-word'}
                 textTransform={'uppercase'}
                 whiteSpace='pre-line'
-                // whiteSpace='pre-wrap'
                 as='h1'
                 size={{ base: '2xl', sm: '2xl', xl: '3xl' }}
                 fontWeight={800}
@@ -103,7 +103,6 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
         </Box>
 
         <Box
-          // ref={elementRef}
           w={{ base: '100%', lg: '900px' }}
           sx={{
             position: 'relative',
@@ -150,13 +149,12 @@ const HomeHero: React.FC<any> = ({ heroTitle, heroDescription, dimensions, image
             }}
           >
             <Image
-              // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
               layout='responsive'
               objectFit='contain'
               width={900}
               height={600}
-              src={image.data.attributes.url}
-              alt={image.data.attributes.alternativeText}
+              src={image.data?.attributes?.url || ''}
+              alt={image.data?.attributes?.alternativeText || ''}
               priority
             />
           </motion.div>

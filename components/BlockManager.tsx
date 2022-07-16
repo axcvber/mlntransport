@@ -2,7 +2,6 @@ import { Box } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import React from 'react'
 import { Maybe, PageBlocksDynamicZone } from '../generated'
-
 const HomeHero = dynamic(() => import('./blocks/HomeHero'))
 const Section = dynamic(() => import('./blocks/Section'))
 const Heading = dynamic(() => import('./blocks/Heading'))
@@ -13,10 +12,10 @@ const Prices = dynamic(() => import('./blocks/Prices'))
 const DoubleSection = dynamic(() => import('./blocks/DoubleSection'))
 const Contacts = dynamic(() => import('./blocks/Contacts'))
 
-const getBlockComponent = ({ __typename, ...rest }: any, index: any) => {
-  let Block
+const getBlockComponent = (item: Maybe<PageBlocksDynamicZone>, index: number) => {
+  let Block: any
 
-  switch (__typename) {
+  switch (item?.__typename) {
     case 'ComponentBlocksHomeHero':
       Block = HomeHero
       break
@@ -49,8 +48,8 @@ const getBlockComponent = ({ __typename, ...rest }: any, index: any) => {
   }
 
   return Block ? (
-    <Box as='section' mb={10} key={`${__typename}-${index}`}>
-      <Block {...rest} />
+    <Box as='section' mb={10} key={`${item?.__typename}-${index}`}>
+      <Block {...item} />
     </Box>
   ) : null
 }

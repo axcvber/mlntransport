@@ -66,7 +66,7 @@ const Footer = () => {
           opacity: 0.6,
         }}
       >
-        <Container id='form' maxW={{ base: 'full', md: 'container.lg' }} px={{ base: 0, md: 'inherit' }}>
+        <Container maxW={{ base: 'full', md: 'container.lg' }} px={{ base: 0, md: 'inherit' }}>
           <ContactForm />
         </Container>
         <Box

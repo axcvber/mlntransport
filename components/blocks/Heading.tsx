@@ -2,10 +2,11 @@ import { Box, Button, Heading as ChakraHeading, Text, VStack } from '@chakra-ui/
 import Image from 'next/image'
 import React from 'react'
 import { FiCornerRightDown } from 'react-icons/fi'
+import { ComponentBlocksHeading } from '../../generated'
 import useLocale from '../../hooks/useLocale'
 import RSLink from '../RSLink.tsx'
 
-const Heading = ({ headingTitle, headingDescription, background, contactButton }: any) => {
+const Heading: React.FC<ComponentBlocksHeading> = ({ headingTitle, headingDescription, background, contactButton }) => {
   const t = useLocale()
 
   return (
@@ -43,12 +44,12 @@ const Heading = ({ headingTitle, headingDescription, background, contactButton }
       </Box>
       <Image
         priority
-        src={background?.data.attributes.url}
+        src={background.data?.attributes?.url || ''}
         placeholder='blur'
-        blurDataURL={background?.data.attributes.url}
+        blurDataURL={background.data?.attributes?.url || ''}
         layout='fill'
         objectFit='cover'
-        alt={background?.data.attributes.alternativeText}
+        alt={background.data?.attributes?.alternativeText || ''}
       />
     </Box>
   )

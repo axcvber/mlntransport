@@ -3,7 +3,6 @@ import React, { useEffect } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Field from '../form/Field'
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import Select from '../form/Select'
 import PhoneField from '../form/PhoneField'
 import { FaPhoneAlt } from 'react-icons/fa'
@@ -17,6 +16,7 @@ import ContactInfoButton from '../form/components/ContactInfoButton'
 import useAppContext from '../../hooks/useAppContext'
 import { useAnimation, motion } from 'framer-motion'
 import getSocialIcon from '../../utils/getSocialIcon'
+import { ContactFormSchema } from '../../schemas/contact-schema'
 
 export interface IContactFormInputs {
   fullName: string
@@ -27,33 +27,12 @@ export interface IContactFormInputs {
 }
 
 const squareVariants = {
-  visible: { opacity: 1, scale: 1 },
-  hidden: { opacity: 0, scale: 0.3 },
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 100 },
 }
-
-const phoneRegExp =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 const ContactForm = () => {
   const t = useLocale()
-  const ContactFormSchema = yup
-    .object({
-      email: yup.string().email(t.form.validation.email.email).required(t.form.validation.email.required),
-      fullName: yup
-        .string()
-        .max(20, t.form.validation.fullName.max)
-        .required(t.form.validation.fullName.required)
-        .matches(/^[a-zA-ZА-Яа-я\s]+$/, t.form.validation.fullName.matches)
-        .trim(),
-      phone: yup
-        .string()
-        .required(t.form.validation.phone.required)
-        .matches(phoneRegExp, t.form.validation.phone.matches),
-      service: yup.string().required(t.form.validation.service.required),
-      message: yup.string().max(300, t.form.validation.message.max).trim(),
-    })
-    .required()
-
   const {
     handleSubmit,
     control,
@@ -61,28 +40,18 @@ const ContactForm = () => {
     setValue,
     reset,
   } = useForm<IContactFormInputs>({
-    resolver: yupResolver(ContactFormSchema),
+    resolver: yupResolver(ContactFormSchema()),
   })
   const toast = useToast()
   const { initialData } = useAppContext()
-  const contacts = initialData?.contact?.data?.attributes as any
-  const servicesArr = initialData?.services?.data
-  const icons = initialData?.contact?.data?.attributes?.socialNetworks
-
-  // const controls = useAnimation()
-  // const [ref, inView] = useInView()
-  // useEffect(() => {
-  //   if (inView) {
-  //     controls.start('visible')
-  //   }
-  // }, [controls, inView])
-
   const ctrls = useAnimation()
-
   const { ref, inView } = useInView({
     threshold: 0.5,
     triggerOnce: true,
   })
+  const contacts = initialData?.contact?.data?.attributes
+  const servicesArr = initialData?.services?.data
+  const icons = initialData?.contact?.data?.attributes?.socialNetworks
 
   useEffect(() => {
     if (inView) {
@@ -95,7 +64,7 @@ const ContactForm = () => {
 
   const onSubmit: SubmitHandler<IContactFormInputs> = async (data) => {
     try {
-      await axios.post(`https://mlntransport-admin.herokuapp.com/api/ezforms/submit`, { formData: data })
+      await axios.post(`${process.env.SERVER_API}/api/ezforms/submit`, { formData: data })
       toast({
         description: t.form.notify.successFormSend,
         status: 'success',
@@ -115,11 +84,12 @@ const ContactForm = () => {
 
   return (
     <motion.div
+      id='form'
       ref={ref}
       initial='hidden'
       animate={ctrls}
       variants={squareVariants}
-      transition={{ type: 'spring', bounce: 0.25 }}
+      transition={{ type: 'spring', bounce: 0.5, delay: 0.1 }}
     >
       <VStack textAlign={'center'}>
         <Heading>{t.section.contactUs.title}</Heading>
@@ -179,84 +149,93 @@ const ContactForm = () => {
               <Text fontSize={'sm'}>{t.form.info.subtitle}</Text>
             </VStack>
 
-            <VStack spacing={3} alignItems='flex-start' flexWrap={'wrap'}>
-              {contacts.phoneNumbers.map((item: any) => (
-                <ContactInfoButton key={item.id} link={`tel:${item?.phone}`} label={item.phone} icon={<FaPhoneAlt />} />
-              ))}
-              <ContactInfoButton link={`mailto:${contacts.email}`} label={contacts.email} icon={<IoMail />} />
-              {contacts.address && (
-                <ContactInfoButton
-                  link={contacts?.address?.googleMapLink}
-                  label={contacts?.address?.address}
-                  icon={<IoLocationSharp />}
-                />
+            <VStack spacing={3} alignItems='flex-start' flexWrap={'wrap'} as='ul'>
+              {contacts &&
+                contacts.phoneNumbers.map((item: any) => (
+                  <li key={item.id}>
+                    <ContactInfoButton link={`tel:${item?.phone}`} label={item.phone} icon={<FaPhoneAlt />} />
+                  </li>
+                ))}
+              {contacts?.email && (
+                <li>
+                  <ContactInfoButton link={`mailto:${contacts.email}`} label={contacts.email} icon={<IoMail />} />
+                </li>
+              )}
+              {contacts && contacts.address && (
+                <li>
+                  <ContactInfoButton
+                    link={contacts?.address?.googleMapLink}
+                    label={contacts?.address?.address}
+                    icon={<IoLocationSharp />}
+                  />
+                </li>
               )}
             </VStack>
-            <HStack mt={6}>
+            <HStack mt={6} as='ul'>
               {icons?.map((item) => (
-                <a key={item?.id} href={item?.link} target='_blank' rel='noopener noreferrer'>
-                  <Box
-                    sx={{
-                      w: '35px',
-                      h: '35px',
-                      borderRadius: '50%',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      cursor: 'pointer',
-                      transition: 'all 0.2s ease',
-                      bg: 'brand.50',
-                      '&:hover': {
-                        bg: '#fff',
-                        transform: 'translateY(-2px)',
-                      },
-                      'svg': {
-                        color: 'brand.500',
-                        fontSize: 18,
-                      },
-                    }}
-                  >
-                    {getSocialIcon(item?.icon)}
-                  </Box>
-                </a>
+                <li key={item?.id}>
+                  <a href={item?.link} target='_blank' rel='noopener noreferrer'>
+                    <Box
+                      sx={{
+                        w: '35px',
+                        h: '35px',
+                        borderRadius: '50%',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        cursor: 'pointer',
+                        transition: 'all 0.2s ease',
+                        bg: 'brand.50',
+                        '&:hover': {
+                          bg: '#fff',
+                          transform: 'translateY(-2px)',
+                        },
+                        'svg': {
+                          color: 'brand.500',
+                          fontSize: 18,
+                        },
+                      }}
+                    >
+                      {getSocialIcon(item?.icon)}
+                    </Box>
+                  </a>
+                </li>
               ))}
             </HStack>
           </Box>
 
-          <Box px={{ base: 2, md: 2, lg: 10 }} pt={2} flex={1}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Stack spacing={4}>
-                <Stack direction={{ base: 'column', sm: 'row' }}>
-                  <Field name='fullName' control={control} label={t.form.label.fullName} icon={<FiUser />} />
-                  <Field name='email' control={control} label={t.form.label.email} type='email' icon={<FiMail />} />
-                </Stack>
-                <Stack direction={{ base: 'column', sm: 'row' }}>
-                  <PhoneField control={control} name='phone' label={t.form.label.phone} icon={<FiPhone />} />
-                  <Select
-                    name='service'
-                    control={control}
-                    options={servicesArr || []}
-                    placeholder={t.form.placeholder.service}
-                    label={t.form.label.service}
-                    icon={<FiPackage />}
-                    setValue={setValue}
-                    isSubmitSuccessful={isSubmitSuccessful}
-                  />
-                </Stack>
-                <Textarea name='message' control={control} label={t.form.label.message} icon={<FiMessageSquare />} />
-                <Box display={'flex'} justifyContent='flex-end'>
-                  <Button
-                    loadingText={t.form.submitting}
-                    colorScheme='brand'
-                    isLoading={isSubmitting}
-                    type='submit'
-                    rightIcon={<FiArrowUpRight fontSize={20} />}
-                  >
-                    {t.button.sendForm}
-                  </Button>
-                </Box>
+          <Box as='form' px={{ base: 2, md: 2, lg: 10 }} pt={2} flex={1} onSubmit={handleSubmit(onSubmit)}>
+            <Stack spacing={4}>
+              <Stack direction={{ base: 'column', sm: 'row' }}>
+                <Field name='fullName' control={control} label={t.form.label.fullName} icon={<FiUser />} />
+                <Field name='email' control={control} label={t.form.label.email} type='email' icon={<FiMail />} />
               </Stack>
-            </form>
+              <Stack direction={{ base: 'column', sm: 'row' }}>
+                <PhoneField control={control} name='phone' label={t.form.label.phone} icon={<FiPhone />} />
+                <Select
+                  name='service'
+                  control={control}
+                  options={servicesArr || []}
+                  placeholder={t.form.placeholder.service}
+                  label={t.form.label.service}
+                  icon={<FiPackage />}
+                  setValue={setValue}
+                  isSubmitSuccessful={isSubmitSuccessful}
+                />
+              </Stack>
+              <Textarea name='message' control={control} label={t.form.label.message} icon={<FiMessageSquare />} />
+              <Box display={'flex'} justifyContent='flex-end'>
+                <Button
+                  loadingText={t.form.submitting}
+                  colorScheme='brand'
+                  isLoading={isSubmitting}
+                  type='submit'
+                  rightIcon={<FiArrowUpRight fontSize={20} />}
+                >
+                  {t.button.sendForm}
+                </Button>
+              </Box>
+            </Stack>
           </Box>
         </Stack>
       </Box>

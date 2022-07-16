@@ -1,7 +1,8 @@
 import { Box, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
+import { ComponentTitleTitle } from '../generated'
 
-const BlockTitle: React.FC<{ title: any }> = ({ title }) => {
+const BlockTitle: React.FC<{ title: ComponentTitleTitle }> = ({ title }) => {
   let position
   switch (title.align) {
     case 'left':
@@ -21,7 +22,8 @@ const BlockTitle: React.FC<{ title: any }> = ({ title }) => {
   return (
     <Box display={'flex'} flexDirection='column' alignItems={position} mb={5}>
       <Heading
-        textAlign={title.align}
+        as='h3'
+        textAlign={title.align ? title.align : 'left'}
         sx={{
           position: 'relative',
           py: title.decoration ? 2 : 0,
@@ -51,7 +53,7 @@ const BlockTitle: React.FC<{ title: any }> = ({ title }) => {
         {title.title}
       </Heading>
       {title.description && (
-        <Text maxW='400px' mt={3} textAlign={title.align}>
+        <Text maxW='400px' mt={3} textAlign={title.align ? title.align : 'left'}>
           {title.description}
         </Text>
       )}

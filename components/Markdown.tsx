@@ -1,12 +1,11 @@
-import { Box, chakra, Heading, Text, useDimensions } from '@chakra-ui/react'
-import Image from 'next/image'
-import React, { useRef } from 'react'
+import { Box, chakra, Heading, Text } from '@chakra-ui/react'
+// import Image from 'next/image'
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
-const Markdown = ({ content }: any) => {
+const Markdown: React.FC<{ content: string | undefined }> = ({ content }) => {
   const RMarkdown = chakra(ReactMarkdown)
-  const elementRef = useRef<any>()
-  const dimension = useDimensions(elementRef, true)
+  if (!content) return null
   return (
     <RMarkdown
       sx={{
@@ -42,40 +41,41 @@ const Markdown = ({ content }: any) => {
         //     return null
         //   }
         // },
-        p: ({ node, children }) => {
-          //@ts-ignore
-          if (node.children[0].tagName === 'img') {
-            const image: any = node.children[0]
-            console.log('image', image)
+        // p: ({ node, children }) => {
+        //   //@ts-ignore
+        //   if (node.children[0].tagName === 'img') {
+        //     const image: any = node.children[0]
+        //     console.log('image', image)
 
-            const metastring = image.properties.alt
-            const alt = metastring?.replace(/ *\{[^)]*\} */g, '')
-            const metaWidth = metastring.match(/{([^}]+)x/)
-            const metaHeight = metastring.match(/x([^}]+)}/)
-            const width = metaWidth ? metaWidth[1] : '768'
-            const height = metaHeight ? metaHeight[1] : '432'
+        //     // const width = metaWidth ? metaWidth[1] : '768'
+        //     // const height = metaHeight ? metaHeight[1] : '432'
 
-            return (
-              <Box sx={{ width: '100%' }} mb={0}>
-                <Image
-                  placeholder='blur'
-                  blurDataURL={image.properties.src}
-                  src={image.properties.src}
-                  width={1600}
-                  height={800}
-                  objectFit='cover'
-                  layout='responsive'
-                  alt={alt}
+        //     return (
+        //       <Box
+        //         mb={0}
+        //         sx={{
+        //           position: 'relative',
+        //           width: '100%',
+        //           minHeight: '200px',
+        //         }}
+        //       >
+        //         <Image
+        //           placeholder='blur'
+        //           blurDataURL={image.properties.src}
+        //           src={image.properties.src}
+        //           layout='fill'
+        //           objectFit='contain'
+        //           alt={image.properties.alt}
 
-                  // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
-                />
-              </Box>
-            )
-          }
-          // Return default child if it's not an image
-          return <p>{children}</p>
-        },
-        // p: ({ node, ...props }) => <Text lineHeight={1.8}>{props.children}</Text>,
+        //           // sizes={dimension ? `${Math.round(dimension.borderBox.width)}px` : '100vw'}
+        //         />
+        //       </Box>
+        //     )
+        //   }
+        //   // Return default child if it's not an image
+        //   return <p>{children}</p>
+        // },
+        p: ({ node, ...props }) => <Text lineHeight={1.8}>{props.children}</Text>,
         a: ({ node, ...props }) => (
           <StyledLink {...props} target='_blank' rel='noreferrer'>
             {props.children}

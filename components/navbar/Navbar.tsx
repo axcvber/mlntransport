@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import Logo from '../Logo'
 import { FiMenu } from 'react-icons/fi'
 import useLocale from '../../hooks/useLocale'
-// import MobileMenu from './MobileMenu'
 import NavMenu from './NavMenu'
 import Progress from '../Progress'
 import RSLink from '../RSLink.tsx'
@@ -20,7 +19,6 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
   const t = useLocale()
   const [stickyNav, setStickyNav] = useState<boolean>(false)
   const [isOpenMenu, setOpenMenu] = useState<boolean>(false)
-  console.log('render navbar')
 
   const scrollHandler = () => {
     if (window.pageYOffset > 0) {
@@ -64,7 +62,7 @@ const Navbar: React.FC<INavbar> = ({ isRouteChanging, loadingKey }) => {
             <RSLink to='form'>
               <Button
                 ml={{ base: 2, sm: 0 }}
-                leftIcon={<RiContactsBook2Fill fontSize={22} />}
+                leftIcon={<RiContactsBook2Fill fontSize={20} />}
                 bg={stickyNav ? '#fff' : 'brand.500'}
                 colorScheme={stickyNav ? 'gray' : 'brand'}
                 color={stickyNav ? 'gray.800' : '#fff'}

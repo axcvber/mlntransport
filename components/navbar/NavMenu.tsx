@@ -11,7 +11,6 @@ const NavMenu: React.FC<{ stickyNav: boolean }> = ({ stickyNav }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { initialData } = useAppContext()
   const navLinks = initialData?.navbar?.data?.attributes?.navLinks
-  console.log('render nav menu')
 
   const navLinkStyles = {
     position: 'relative',

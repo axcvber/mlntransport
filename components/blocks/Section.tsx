@@ -1,8 +1,9 @@
 import React from 'react'
+import { ComponentBlocksSection } from '../../generated'
 import BlockTitle from '../BlockTitle'
 import Markdown from '../Markdown'
 
-const Section = ({ title, content }: any) => {
+const Section: React.FC<ComponentBlocksSection> = ({ title, content }) => {
   return (
     <>
       {title && <BlockTitle title={title} />}

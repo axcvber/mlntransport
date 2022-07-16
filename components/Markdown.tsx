@@ -11,7 +11,7 @@ const Markdown: React.FC<{ content: string | undefined }> = ({ content }) => {
       sx={{
         // px: 4,
         '*': {
-          mb: 3,
+          mb: 4,
           color: 'gray.600',
         },
         'h1,h2,h3,h4,h5,h6': {
@@ -224,15 +224,16 @@ const StyledList = chakra('ul', {
       position: 'relative',
       color: 'gray.700',
       fontWeight: 500,
-      paddingLeft: '20px',
+      paddingLeft: '25px',
+      fontSize: 'lg',
       my: 1.5,
       '&:last-child': {
         marginBottom: 0,
       },
       '&:before': {
         content: '""',
-        width: '8px',
-        height: '8px',
+        width: '10px',
+        height: '10px',
         bg: 'brand.300',
         fontWeight: 'bold',
         display: 'flex',

@@ -15,19 +15,4 @@ const client = new ApolloClient({
   },
 })
 
-// const client = new ApolloClient({
-//   cache: new InMemoryCache(),
-//   uri: `https://mlntransport-admin.herokuapp.com/graphql`,
-//   defaultOptions: {
-//     watchQuery: {
-//       fetchPolicy: 'no-cache',
-//       errorPolicy: 'ignore',
-//     },
-//     query: {
-//       fetchPolicy: 'no-cache',
-//       errorPolicy: 'all',
-//     },
-//   },
-// })
-
 export default client

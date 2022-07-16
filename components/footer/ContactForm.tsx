@@ -1,5 +1,5 @@
 import { Box, Button, Heading, HStack, Stack, Text, useToast, VStack } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import Field from '../form/Field'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,13 +8,11 @@ import PhoneField from '../form/PhoneField'
 import { FaPhoneAlt } from 'react-icons/fa'
 import { IoMail, IoLocationSharp } from 'react-icons/io5'
 import axios from 'axios'
-import { useInView } from 'react-intersection-observer'
 import { FiArrowUpRight, FiMail, FiMessageSquare, FiPackage, FiPhone, FiUser } from 'react-icons/fi'
 import useLocale from '../../hooks/useLocale'
 import Textarea from '../form/Textarea'
 import ContactInfoButton from '../form/components/ContactInfoButton'
 import useAppContext from '../../hooks/useAppContext'
-import { useAnimation, motion } from 'framer-motion'
 import getSocialIcon from '../../utils/getSocialIcon'
 import { ContactFormSchema } from '../../schemas/contact-schema'
 
@@ -24,11 +22,6 @@ export interface IContactFormInputs {
   phone: number
   service: string
   message: string
-}
-
-const squareVariants = {
-  visible: { opacity: 1, y: 0 },
-  hidden: { opacity: 0, y: 100 },
 }
 
 const ContactForm = () => {
@@ -44,23 +37,9 @@ const ContactForm = () => {
   })
   const toast = useToast()
   const { initialData } = useAppContext()
-  const ctrls = useAnimation()
-  const { ref, inView } = useInView({
-    threshold: 0.5,
-    triggerOnce: true,
-  })
   const contacts = initialData?.contact?.data?.attributes
   const servicesArr = initialData?.services?.data
   const icons = initialData?.contact?.data?.attributes?.socialNetworks
-
-  useEffect(() => {
-    if (inView) {
-      ctrls.start('visible')
-    }
-    if (!inView) {
-      ctrls.start('hidden')
-    }
-  }, [ctrls, inView])
 
   const onSubmit: SubmitHandler<IContactFormInputs> = async (data) => {
     try {
@@ -83,15 +62,8 @@ const ContactForm = () => {
   }
 
   return (
-    <motion.div
-      id='form'
-      ref={ref}
-      initial='hidden'
-      animate={ctrls}
-      variants={squareVariants}
-      transition={{ type: 'spring', bounce: 0.5, delay: 0.1 }}
-    >
-      <VStack textAlign={'center'}>
+    <>
+      <VStack textAlign={'center'} id='form'>
         <Heading>{t.section.contactUs.title}</Heading>
         <Text mt={4} maxW='md'>
           {t.section.contactUs.subtitle}
@@ -239,7 +211,7 @@ const ContactForm = () => {
           </Box>
         </Stack>
       </Box>
-    </motion.div>
+    </>
   )
 }
 

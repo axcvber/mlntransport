@@ -20,9 +20,6 @@ const Page: React.FC<IPage> = ({ pageData }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  // const { res } = context
-  // res.setHeader('Cache-Control', 'public, s-maxage=43200, stale-while-revalidate=60')
-
   const { locale } = context
   const { slug } = context.params as any
 
